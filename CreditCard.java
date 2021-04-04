@@ -1,6 +1,9 @@
-//Name: team team team team
-//ID:
-//Section:
+/**
+ * @author Phichayut    Ngoennim [6388035]
+ * @author Jirayu       Klinudom [6388085]
+ * @author Perakorn     Nimitkul [6388127]
+ * Section              2
+ */
 
 public class CreditCard{
 	
