@@ -106,7 +106,7 @@ public class CreditCard{
 					break;
 				case MASTERCARD:
 					result = cardNumber.replaceAll("(.{" + spaceEvery4 + "})", "$1 ").trim();
-					break;
+					break;gg
 				case AMERICANEXPRESS:
 					
 					break;
