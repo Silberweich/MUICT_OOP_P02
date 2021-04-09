@@ -1,9 +1,6 @@
-/**
- * @author Phichayut    Ngoennim [6388035]
- * @author Jirayu       Klinudom [6388085]
- * @author Perakorn     Nimitkul [6388127]
- * Section              2
- */
+//Name:
+//ID:
+//Section:
 
 public class CreditCard{
 	
@@ -96,6 +93,7 @@ public class CreditCard{
 				spaceEvery5 = "5",
 				spaceEvery6 = "6", 
 				result = null,
+				temp = "";
 				temp = null;
 		
 		String cardNumber = getNumber();
@@ -111,7 +109,17 @@ public class CreditCard{
 					result = cardNumber.replaceAll("(.{" + spaceEvery4 + "})", "$1 ").trim();
 					break;
 				case AMERICANEXPRESS:
+
+					for(int i = 0; i < cardNumber.length(); i++) {
+						if(i==4||i==11) {
+							result = temp.concat(" ");
+						} else {
+							result = temp.concat(Character.toString(cardNumber.charAt(i)));
+						}
+					}
+
 					//fuck my ass
+
 					break;
 			}
 		}
