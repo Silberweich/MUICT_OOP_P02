@@ -23,6 +23,7 @@ public abstract class Payment {
 		return "Method: " + method + ", Amount: " + amount;
 	}
 	
+        //@Override
 	public String toString() {
 		return method + "::" + amount;
 	}

@@ -4,7 +4,7 @@
  * @author Perakorn     Nimitkul [6388127]
  * Section              2
  */
-public class PaymentEWallet  {
+public class PaymentEWallet extends Payment implements Authorization  {
 	
 	
 	//**************************** DO NOT MODIFY **********************************//
@@ -35,7 +35,8 @@ public class PaymentEWallet  {
 	 * If the payment is unauthorized, do nothing and return false
 	 */
 	
-	//@Override
+	
+        @Override
 	public boolean paid() {
 		//******************* YOUR CODE HERE ******************
 		return false;
@@ -49,7 +50,8 @@ public class PaymentEWallet  {
 	 * Otherwise, print authorization error message and return false
 	 */
 
-	//@Override
+	
+        @Override
 	public boolean authorize() {
 		//******************* YOUR CODE HERE ******************
 		return false;
@@ -60,6 +62,12 @@ public class PaymentEWallet  {
 	
 	
 	//**************************** DO NOT MODIFY **********************************//
+
+    /**
+     *
+     * @return
+     */
+        @Override
 	public String toString() {
 		return "EWALLET::" + wallet.getCustID(); 
 	}

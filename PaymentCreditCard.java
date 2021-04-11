@@ -4,7 +4,7 @@
  * @author Perakorn     Nimitkul [6388127]
  * Section              2
  */
-public class PaymentCreditCard  {
+public class PaymentCreditCard extends Payment implements Authorization {
 	
 	//**************************** DO NOT MODIFY **********************************//
 	
@@ -41,6 +41,7 @@ public class PaymentCreditCard  {
 	 * If the payment is authorized and the paid amount is less than or equal to the CARDLIMIT, return true
 	 * Otherwise, print the payment error message and return false.
 	 */
+        @Override
 	public boolean paid() {
 		//******************* YOUR CODE HERE ******************
 		return false;
@@ -53,6 +54,7 @@ public class PaymentCreditCard  {
 	 * If the card is invalid, print the authorization error message and return false.
 	 */
 	//@Override
+        @Override
 	public boolean authorize() {
 		//******************* YOUR CODE HERE ******************
 		return false;
@@ -65,6 +67,7 @@ public class PaymentCreditCard  {
 	
 	
 	//**************************** DO NOT MODIFY **********************************//
+        @Override
 	public String toString() {
 		return "CARD::" + card.getNumber();
 	}

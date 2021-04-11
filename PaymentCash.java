@@ -4,7 +4,7 @@
  * @author Perakorn     Nimitkul [6388127]
  * Section              2
  */
-public class PaymentCash {
+public class PaymentCash extends Payment{
 	
 	//**************************** DO NOT MODIFY **********************************//
 			
@@ -15,8 +15,8 @@ public class PaymentCash {
 	
 	
 	/**
-	 * Constructor initializes the payment method's name as "CASH", paid amount, and cash tendered.
-	 * The instant file "change" is set to 0 (no change is calculated yet)
+	 * Constructor initializes the payment method's name as "CASH", paid amount, and cash tendered.The instant file "change" is set to 0 (no change is calculated yet)
+         * @param amount
 	 * @param paid amount 
 	 * @param cash tendered
 	 */
@@ -32,6 +32,7 @@ public class PaymentCash {
 	 * If the cash tendered is more than the amount, the change have to be calculated and return true
 	 * Otherwise, print the error message "Sorry, you have insufficient balance!" (Payment.ERROR) and return false
 	 */
+        @Override
 	public boolean paid() {
 		//******************* YOUR CODE HERE ******************
 		
@@ -45,6 +46,7 @@ public class PaymentCash {
 	 * @return string to provide information of this payment
 	 * *** note. you have a freedom to design your output here ***
 	 */
+        @Override
 	public String paymentInformation() {
 		//******************* YOUR CODE HERE ******************
 		return null;
@@ -61,6 +63,7 @@ public class PaymentCash {
 		return this.change;
 	}
 	
+        @Override
 	public String toString() {
 		return "CASH::" + cashTendered;
 	}

@@ -4,7 +4,7 @@
  * @author Perakorn     Nimitkul [6388127]
  * Section              2
  */
-public class CustomerOnline {
+public class CustomerOnline extends Customer {
 	
 	//**************************** DO NOT MODIFY **********************************//
 	private double distance;	// delivery distance
