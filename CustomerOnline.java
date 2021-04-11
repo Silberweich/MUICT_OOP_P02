@@ -1,9 +1,14 @@
 /**
- * @author Phichayut    Ngoennim [6388035]
+ * @author Phichayut    Ngoennim [6388035] >>> MAIN CONTRIBUTOR
  * @author Jirayu       Klinudom [6388085]
  * @author Perakorn     Nimitkul [6388127]
  * Section              2
+ * 
+ * @status           >>>TASK 1 COMPLETED
+ * @Note             >>>Nothing much to say here just followed the instruction
+ *                      and run the test case successfully
  */
+
 public class CustomerOnline extends Customer {
 	
 	//**************************** DO NOT MODIFY **********************************//

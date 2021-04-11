@@ -1,10 +1,14 @@
 /**
- * @author Phichayut    Ngoennim [6388035]
+ * @author Phichayut    Ngoennim [6388035] >>> MAIN CONTRIBUTOR
  * @author Jirayu       Klinudom [6388085]
- * @author Perakorn     Nimitkul [6388127]
+ * @author Perakorn     Nimitkul [6388127] >>> CHECK AND DEBUG
  * Section              2
- * @Status              
+ * 
+ * @status           >>>TASK 1 COMPLETED
+ * @Note             >>>Nothing much to say here just followed the instruction
+ *                      and run the test case successfully
  */
+
 public class PaymentCreditCard extends Payment implements Authorization {
 	
 	//**************************** DO NOT MODIFY **********************************//
@@ -64,7 +68,7 @@ public class PaymentCreditCard extends Payment implements Authorization {
             {
                 return true;
             }
-            System.out.print(Authorization.ERROR);
+            System.out.println(Authorization.ERROR);
             return false;
 	}
 

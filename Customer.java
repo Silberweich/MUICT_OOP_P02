@@ -1,9 +1,13 @@
 /**
- * @author Phichayut    Ngoennim [6388035]
+ * @author Phichayut    Ngoennim [6388035] >>> MAIN CONTRIBUTOR
  * @author Jirayu       Klinudom [6388085]
  * @author Perakorn     Nimitkul [6388127]
  * Section              2
+ * 
+ * @status           >>>TASK 1 COMPLETED
+ * @Note             >>>Small Confusion on runningID assignment
  */
+
 public class Customer {
 	
 	//**************************** DO NOT MODIFY **********************************//

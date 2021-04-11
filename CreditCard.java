@@ -1,9 +1,13 @@
 /**
- * @author Phichayut    Ngoennim [6388035]
- * @author Jirayu       Klinudom [6388085]
- * @author Perakorn     Nimitkul [6388127]
+ * @author Phichayut    Ngoennim [6388035] 
+ * @author Jirayu       Klinudom [6388085] >>> MAIN CONTRIBUTOR
+ * @author Perakorn     Nimitkul [6388127] >>> DEBUG AND CHECK
  * Section              2
+ * 
+ * @status           >>>TASK 1 COMPLETED
+ * @Note             >>>Small confusion on AMERICAN EXPRESS card
  */
+
 public class CreditCard{
 	
 	//**************************** DO NOT MODIFY **********************************//
