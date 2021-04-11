@@ -26,11 +26,8 @@ public class CreditCard{
 		//******************* YOUR CODE HERE ******************
 		this.number = number;
 		this.type = type;
-		//*****************************************************
-		
+		//*****************************************************	
 	}
-	
-	
 	/**
 	 * Verify the validity of the card information. Different card type has different format of card number as follow
 	 * VISA -> the number must be 16 digits, and start with number 4
@@ -43,34 +40,37 @@ public class CreditCard{
 	 * 
 	 * @return True if the card is valid, otherwise return false
 	 */
-	public boolean isValid() {
-		//******************* YOUR CODE HERE ******************
-		boolean valid = false;
-		switch(type) {
-			case VISA:
-				if(number.length()==16&&number.startsWith("4")) {
-					valid = true;
-				}
-				break;
-			case AMERICANEXPRESS:
-				if(number.length()==15&&(number.startsWith("34")||number.startsWith("37"))) {
-					valid = true;
-				}
-				break;
-			case JCB:
-				if(number.length()==16&&(number.startsWith("3428")||number.startsWith("3589"))) {
-					valid = true;
-				}
-				break;
-			case MASTERCARD:
-				if(number.length()==16&&(number.startsWith("51")||number.startsWith("52"))) {
-					valid = true;
-				}
-				break;
-			}
-		
-		return valid;
-		//*****************************************************
+	public boolean isValid() 
+        {
+            boolean valid = false;
+            switch(type) 
+            {
+                case VISA:
+                    if(number.length()==16&&number.startsWith("4")) 
+                    {
+                            valid = true;
+                    }
+                    break;
+                case AMERICANEXPRESS:
+                    if(number.length()==15&&(number.startsWith("34")||number.startsWith("37"))) 
+                    {
+                            valid = true;
+                    }
+                    break;
+                case JCB:
+                    if(number.length()==16&&(number.startsWith("3428")||number.startsWith("3589"))) 
+                    {
+                            valid = true;
+                    }
+                    break;
+                case MASTERCARD:
+                    if(number.length()==16&&(number.startsWith("51")||number.startsWith("52"))) 
+                    {
+                            valid = true;
+                    }
+                    break;
+                }
+            return valid;	
 	}
 	
 	
@@ -90,44 +90,42 @@ public class CreditCard{
 	 * @return a string of formatted card's number
 	 */
 	public String getFormattedCardNumber() {
-		//******************* YOUR CODE HERE ******************
 		String	spaceEvery4 = "4",
-				spaceEvery5 = "5",
-				spaceEvery6 = "6", 
-				result = null,
-				temp = "";
-				temp = null;
+                spaceEvery5 = "5",
+                spaceEvery6 = "6", 
+                result = null,
+                temp = "";
+                temp = null;
 		
 		String cardNumber = getNumber();
-		if(isValid()==true) {
-			switch(type) {
-				case VISA:
-					result = cardNumber.replaceAll("(.{" + spaceEvery4 + "})", "$1 ").trim();
-					break;
-				case JCB:
-					result = cardNumber.replaceAll("(.{" + spaceEvery4 + "})", "$1 ").trim();
-					break;
-				case MASTERCARD:
-					result = cardNumber.replaceAll("(.{" + spaceEvery4 + "})", "$1 ").trim();
-					break;
-				case AMERICANEXPRESS:
-
-					for(int i = 0; i < cardNumber.length(); i++) {
-						if(i==4||i==11) {
-							result = temp.concat(" ");
-						} else {
-							result = temp.concat(Character.toString(cardNumber.charAt(i)));
-						}
-					}
-
-					//fuck my ass
-
-					break;
-			}
+		if(isValid()==true) 
+                {
+                    switch(type) 
+                    {
+                        case VISA:
+                            result = cardNumber.replaceAll("(.{" + spaceEvery4 + "})", "$1 ").trim();
+                            break;
+                        case JCB:
+                            result = cardNumber.replaceAll("(.{" + spaceEvery4 + "})", "$1 ").trim();
+                            break;
+                        case MASTERCARD:
+                            result = cardNumber.replaceAll("(.{" + spaceEvery4 + "})", "$1 ").trim();
+                            break;
+                        case AMERICANEXPRESS:
+                            for(int i = 0; i < cardNumber.length(); i++) 
+                            {
+                                    if(i==4||i==11) 
+                                    {
+                                        result = temp.concat(" ");
+                                    } else 
+                                    {
+                                        result = temp.concat(Character.toString(cardNumber.charAt(i)));
+                                    }
+                            }
+                            break;
+                    }
 		}
 		return result;
-		
-		//*****************************************************
 	}
 	
 	
