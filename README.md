@@ -28,4 +28,5 @@ Time to Crunch
 - [ ] Task 5: Implement Loggable Interface and write to log files 10%
 - [ ] Task 6: Analyzing Data 20%
 ### Note
-> No note just yet
+> No note just yet may be it is time to write something here kekw.
+> people should pay more attention to the README.md file
