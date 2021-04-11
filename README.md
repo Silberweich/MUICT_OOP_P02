@@ -21,7 +21,7 @@ Time to Crunch
 ### Work Check List
 - [x] Follow the submission and coding style guideline 5%
 - [x] On-time Submission 5%
-- [ ] Task 1: Implements classes 20%     -> Item, Customer, CustomerOnline, EWallet, CreditCard, Payment and related classes
+- [x] Task 1: Implements classes 20%     -> Item, Customer, CustomerOnline, EWallet, CreditCard, Payment and related classes
 - [ ] Task 2: DataManagement.java 20%    -> initCustomer, initStock, initWallet 
 - [ ] Task 3: Implement Order class 10%
 - [ ] Task 4: DataManagement.java -> initOrder 10%

@@ -3,8 +3,12 @@
  * @author Jirayu       Klinudom [6388085]
  * @author Perakorn     Nimitkul [6388127]
  * Section              2
+ * 
+ * @import java.io.FileNotFoundException used for error detection during try-catch in reading files
+ * @import java.util.Scanner to use scanner.nextline()
  */
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,7 +48,64 @@ public class DataManagement {
 			// The key of orderData is the order's ID
 	
 	//*****************************************************************************//
-	
+        
+        /** * ADDITIONAL METHOD
+	 * Validates input from given string.If a 
+ Note that customer can be either general customer or an online customer.
+	 * 
+	 * @param input passed from init methods
+         * @param dataType tells filter what type this will be filtered for
+	 * @return returnOperand according to the assigned values designated for each operation
+	 */
+	public static String filter(String input, String dataType)
+        {
+            String returnOperand = "NULL";
+            switch (dataType)
+            {
+                case "Customer": //Customer
+                { 
+                    if(input.matches("^\\d+,[a-zA-z]+,\\d+\\.\\d{2}$"))
+                    {
+                        returnOperand = "T:Online";
+                                                    //System.out.println("OP is"+returnOperand);
+                    }
+                    else if(input.matches("^\\d+,[a-zA-z]+$"))
+                    {
+                        returnOperand = "T:Offline";
+                                                    //System.out.println("OP is"+returnOperand);
+                    }
+                    else
+                    {
+                        returnOperand = "BAD_TYPE";
+                                                    //System.out.println("OP is"+returnOperand);
+                    }
+                    break;
+                }
+                
+                case "Wallet": //Wallet
+                {
+                    if(input.matches("^\\d+,[A-Z]+,\\d+,-?\\d+\\.\\d{2}$"))
+                    {
+                        returnOperand = "T:Encodded";
+                    } 
+                    /*else if(input.matches("^\\d+,[A-Z]+,[a-zA-Z0-9]+,-?\\d+\\.\\d{2}$"))  //Unused but kept until proven nessecary
+                    {
+                        returnOperand = "T:Plain";
+                    } */
+                }
+                
+                case "Stock": //Stock
+                {
+                    if(input.matches("^[a-z\\s]+,\\d+\\.\\d{2},(true|false),\\d+"))
+                    {
+                        returnOperand = "T:Stock";
+                                                    //System.out.println("+1");
+                    } 
+                }
+                
+            }
+            return returnOperand;
+        }
 	
 	/**
 	 * Reads data line by line from the text file.
@@ -55,11 +117,54 @@ public class DataManagement {
 	 * @param filename that keeps customers data
 	 * @return Map collection of customers read from the text file
 	 */
-	public static Map<Integer, Customer> initCustomer(String filename) {
+	public static Map<Integer, Customer> initCustomer(String filename) 
+        {
 		
 		//******************* YOUR CODE HERE ******************
-		
-		return customerData;
+                try 
+                {
+                    File inputFile = new File(filename);
+                    Scanner reader = new Scanner(inputFile);
+                                                                            //System.out.println("Boolean Result: "+reader.hasNextLine());    
+
+                    while (reader.hasNextLine()) 
+                    {
+                        String inputData = reader.nextLine();
+                        
+                                                                            //System.out.println("Curr Line: "+inputData);
+                        
+                        String[] spltArr = inputData.split(",");
+                                                                            //System.out.println("Curr Splt: "+spltArr[0]+spltArr[1]);
+                        switch (filter(inputData,"Customer"))
+                        {
+                        //case offline customer
+                            case "T:Offline":
+                            {
+                                customerData.put(Integer.parseInt(spltArr[0]) , new Customer(Integer.parseInt(spltArr[0]) , spltArr[1]));
+                                //System.out.println("C T1 added");
+                            }
+                                break;
+                        //case online customer
+                            case "T:Online":
+                            {
+                                customerData.put(Integer.parseInt(spltArr[0]) , new CustomerOnline(Integer.parseInt(spltArr[0]) , spltArr[1] , Double.parseDouble(spltArr[2])));
+                                //System.out.println("C T2 added");
+                            }
+                                break;
+                            default:
+                                continue;
+                        }
+                    }
+                    reader.close();
+                } 
+            
+                catch (FileNotFoundException e) 
+                {
+                    System.out.println("Customers file not found");
+                    //e.printStackTrace();
+                }		
+
+               return customerData;
 		
 		//*****************************************************
 	}
@@ -77,7 +182,40 @@ public class DataManagement {
 	public static Map<Integer, EWallet> initWallet(String filename) {
 		
 		//******************* YOUR CODE HERE ******************
-		
+                try 
+                {
+                    File inputFile = new File(filename);
+                    Scanner reader = new Scanner(inputFile);
+                    //System.out.println("Boolean Result: "+reader.hasNextLine());    
+
+                    while (reader.hasNextLine()) 
+                    {
+                        String inputData = reader.nextLine();
+                        String[] spltArr = inputData.split(",");
+                        
+                        switch (filter(inputData,"Wallet"))
+                        {
+                            case "T:Encodded":
+                            {
+                                walletData.put(Integer.parseInt(spltArr[0]), new EWallet( Integer.parseInt(spltArr[0]) , spltArr[1] , Integer.parseInt(spltArr[2]) , Double.parseDouble(spltArr[3]) ) );
+                            }
+                            /*case "T:Plain": Unused, but kept until proven unnecessary
+                            {
+                                walletData.put(Integer.parseInt(spltArr[0]), new EWallet( Integer.parseInt(spltArr[0]) , spltArr[1] , spltArr[2] , Double.parseDouble(spltArr[3]) ) );
+                            }*/
+                            break;
+                            default:
+                                continue;
+                        }
+                    }
+                    reader.close();
+                } 
+            
+                catch (FileNotFoundException e) 
+                {
+                    System.out.println("Wallet file not found");
+                    //e.printStackTrace();
+                }		
 		return walletData;
 		
 		//*****************************************************
@@ -96,7 +234,37 @@ public class DataManagement {
 	public static Map<String, Item> initStock(String filename){
 		
 		//******************* YOUR CODE HERE ******************
-		
+		try 
+                {
+                    File inputFile = new File(filename);
+                    Scanner reader = new Scanner(inputFile);
+                    //System.out.println("Boolean Result: "+reader.hasNextLine());    
+
+                    while (reader.hasNextLine()) 
+                    {
+                        String inputData = reader.nextLine();
+                        String[] spltArr = inputData.split(",");
+                        
+                        switch (filter(inputData,"Stock"))
+                        {
+                            case "T:Stock":
+                            {
+                                stockData.put(spltArr[0], new Item(spltArr[0] , Double.parseDouble(spltArr[1]) , Boolean.parseBoolean(spltArr[2]) , Integer.parseInt(spltArr[3]) ) );
+                            }
+                            break;
+                            default:
+                                continue;
+                        }
+                    }
+                    reader.close();
+                } 
+            
+                catch (FileNotFoundException e) 
+                {
+                    System.out.println("Stock file not found");
+                    //e.printStackTrace();
+                }		
+                
 		return stockData;
 		
 		//*****************************************************
