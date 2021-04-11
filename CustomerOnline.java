@@ -16,10 +16,10 @@ public class CustomerOnline extends Customer {
 	 * @param name
 	 * @param distance
 	 */
-	public CustomerOnline(String name, double distance) {
-		//******************* YOUR CODE HERE ******************
-		
-		//*****************************************************
+	public CustomerOnline(String name, double distance) 
+        {
+            super(name);
+            this.distance = distance;
 	}
 	
 	/**
@@ -28,10 +28,10 @@ public class CustomerOnline extends Customer {
 	 * @param name
 	 * @param distance
 	 */
-	public CustomerOnline(int id, String name, double distance) {
-		//******************* YOUR CODE HERE ******************
-		
-		//*****************************************************
+	public CustomerOnline(int id, String name, double distance) 
+        {
+            super(id,name);
+            this.distance = distance;
 	}
 	
 	//**************************** DO NOT MODIFY **********************************//

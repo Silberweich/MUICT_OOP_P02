@@ -1,6 +1,4 @@
 //**************************** DO NOT MODIFY THIS CLASSS**********************************//
-
-
 public abstract class Payment {
 	
 	public double amount;	// amount to be paid
@@ -32,8 +30,7 @@ public abstract class Payment {
 	 * Abstract method paid()
 	 * @return boolean
 	 */
-	public abstract boolean paid();
-	
+	public abstract boolean paid();	
 }
 
 //*****************************************************************************//
