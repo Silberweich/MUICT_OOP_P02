@@ -57,8 +57,9 @@ public class CreditCard{
                             valid = true;
                     }
                     break;
-                case JCB:
-                    if(number.length()==16&&(number.startsWith("3428")||number.startsWith("3589"))) 
+                case JCB: //Changed JCB condition
+                    String subDigits = number.substring(0, 4);
+                    if(number.length()==16&&(3528<=Integer.parseInt(subDigits)&&Integer.parseInt(subDigits)<=3589)) //Parse substr of the 4th four digits and compare if its valid
                     {
                             valid = true;
                     }
@@ -89,13 +90,14 @@ public class CreditCard{
 	 * 
 	 * @return a string of formatted card's number
 	 */
-	public String getFormattedCardNumber() {
+	public String getFormattedCardNumber()
+        {
 		String	spaceEvery4 = "4",
-                spaceEvery5 = "5",
-                spaceEvery6 = "6", 
+                //spaceEvery5 = "5",
+                //spaceEvery6 = "6", 
                 result = null,
                 temp = "";
-                temp = null;
+                //temp = null;
 		
 		String cardNumber = getNumber();
 		if(isValid()==true) 
