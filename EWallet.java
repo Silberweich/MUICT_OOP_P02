@@ -7,7 +7,7 @@
 public class EWallet {
 	
 	//**************************** DO NOT MODIFY **********************************//
-	private int custID;			// customer's ID who owns this wallet
+	private int custID;		// customer's ID who owns this wallet
 	private String username;
 	private int password;		// password will be encoded using hashCode()
 	private double balance;		// current balance in this wallet
@@ -21,11 +21,12 @@ public class EWallet {
 	 * @param encodedPwd
 	 * @param balance
 	 */
-	public EWallet(int custID, String user, int encodedPwd, double balance) {
-		
-		//******************* YOUR CODE HERE ******************
-		
-		//*****************************************************
+	public EWallet(int custID, String user, int encodedPwd, double balance) 
+        {
+            this.custID = custID;
+            this.username = user;
+            this.password = encodedPwd;
+            this.balance = balance;
 	}
 	
 	/**
@@ -33,14 +34,15 @@ public class EWallet {
 	 * The plain text password have to be encoded before assigned to password instance field.
 	 * @param custID
 	 * @param user
-	 * @param pwd
+	 * @param plainPwd
 	 * @param balance
 	 */
-	public EWallet(int custID, String user, String plainPwd, double balance) {
-		
-		//******************* YOUR CODE HERE ******************
-		
-		//*****************************************************
+	public EWallet(int custID, String user, String plainPwd, double balance) 
+        {
+            this.custID = custID;
+            this.username = user;
+            this.password = plainPwd.hashCode();
+            this.balance = balance;
 	}
 	
 	/**
@@ -48,15 +50,17 @@ public class EWallet {
 	 * If the amount is zero or negative, 
 	 * print a message ("Cannot add balance. Incorrect amount!") and return false. 
 	 * @param amount to be added
-	 * @return boolean 
+	 * @return boolean
 	 */
-	public boolean addBalance(double amount){
-		
-		//******************* YOUR CODE HERE ******************
-		
-		return false;
-		
-		//*****************************************************
+	public boolean addBalance(double amount)
+        {
+            if(amount > 0)
+            {
+                this.balance += amount;
+                return true;
+            }
+            System.out.println("Cannot add balance. Incorrect amount!");
+            return false;	
 	}
 	
 	/**
@@ -66,14 +70,15 @@ public class EWallet {
 	 * @param amount to be deducted
 	 * @return boolean
 	 */
-	public boolean deductBalance(double amount){
-		
-		//******************* YOUR CODE HERE ******************
-		
-		return false;
-		
-		//*****************************************************
-		
+	public boolean deductBalance(double amount)
+        {
+            if(amount > 0)
+            {
+                this.balance -= amount;
+                return true;
+            }
+            System.out.println("Cannot deduct balance. Incorrect amount!");
+            return false;		
 	}
 	
 	//**************************** DO NOT MODIFY **********************************//

@@ -9,8 +9,8 @@ public class Customer {
 	//**************************** DO NOT MODIFY **********************************//
 	public static int runningID = 0;	// static variable for assigning a unique ID to a customer
 
-	private int custID;		// customer's ID
-	private String name;	// customer's name
+	private int custID;                     // customer's ID
+	private String name;                    // customer's name
 	//*****************************************************************************//
 	
 	/**
@@ -19,10 +19,12 @@ public class Customer {
 	 * The first customer will have ID as 1, and the second customer will have ID as 2, and so on
 	 * @param name
 	 */
-	public Customer(String name) {
-		//******************* YOUR CODE HERE ******************
-		
-		//*****************************************************
+	public Customer(String name) 
+        {
+            this.name = name;
+            //normal runningID assignment
+            Customer.runningID++;
+            this.custID = runningID;    
 	}
 	
 	/**
@@ -31,10 +33,18 @@ public class Customer {
 	 * @param id
 	 * @param name
 	 */
-	public Customer(int id, String name) {
-		//******************* YOUR CODE HERE ******************
-		
-		//*****************************************************
+	public Customer(int id, String name) 
+        {
+            this.name = name;
+            //special case ID assigment
+            if(id > Customer.runningID)
+            {
+                this.custID = id; 
+            }
+            else
+            {
+                this.custID = Customer.runningID;
+            }
 	}
 	
 	//**************************** DO NOT MODIFY **********************************//
