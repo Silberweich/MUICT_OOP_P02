@@ -96,7 +96,7 @@ public class CreditCard{
                 //spaceEvery5 = "5",
                 //spaceEvery6 = "6", 
                 result = null,
-                temp = "";
+                temp = new String("");
                 //temp = null;
 		
 		String cardNumber = getNumber();
@@ -114,16 +114,12 @@ public class CreditCard{
                             result = cardNumber.replaceAll("(.{" + spaceEvery4 + "})", "$1 ").trim();
                             break;
                         case AMERICANEXPRESS:
-                            for(int i = 0; i < cardNumber.length(); i++) 
-                            {
-                                    if(i==4||i==11) 
-                                    {
-                                        result = temp.concat(" ");
-                                    } else 
-                                    {
-                                        result = temp.concat(Character.toString(cardNumber.charAt(i)));
-                                    }
-                            }
+                            
+                            String sub1 = cardNumber.substring(0,4);
+                            String sub2 = cardNumber.substring(4,10);
+                            String sub3 = cardNumber.substring(10);
+                            
+                            result = sub1+" "+sub2+" "+sub3;
                             break;
                     }
 		}
