@@ -9,7 +9,7 @@ public class PaymentEWallet extends Payment implements Authorization  {
 	
 	//**************************** DO NOT MODIFY **********************************//
 	private String user;		// username to verify this payment transaction
-	private String pwd;			// password to verify this payment transaction
+	private String pwd;		// password to verify this payment transaction
 	private EWallet wallet;		// EWallet associated with this payment transaction
 	
 	//*****************************************************************************//
@@ -23,10 +23,12 @@ public class PaymentEWallet extends Payment implements Authorization  {
 	 * @param user   (given user to authorize this payment)
 	 * @param pwd	 (given pwd to authorize this payment)
 	 */
-	public PaymentEWallet(double amount, EWallet wallet, String user, String pwd) {
-		//******************* YOUR CODE HERE ******************
-		
-		//*****************************************************
+	public PaymentEWallet(double amount, EWallet wallet, String user, String pwd) 
+        {
+            super("EWALLET",amount);
+            this.wallet = wallet;
+            this.user = user;
+            this.pwd = pwd;
 	}
 	
 	/**
@@ -37,10 +39,23 @@ public class PaymentEWallet extends Payment implements Authorization  {
 	
 	
         @Override
-	public boolean paid() {
-		//******************* YOUR CODE HERE ******************
-		return false;
-		//*****************************************************
+	public boolean paid() 
+        {
+            if(authorize() && this.wallet.getBalance() >= super.amount)
+            {
+                this.wallet.deductBalance(super.amount);
+                return true;
+            }
+            else if(authorize() && this.wallet.getBalance() < super.amount)
+            {
+                System.out.println(Payment.ERROR);
+                return false;
+            }
+            else if(!authorize())
+            {
+                return false;
+            }
+            return false;
 	}
 	
 	
@@ -49,18 +64,17 @@ public class PaymentEWallet extends Payment implements Authorization  {
 	 * If both username and password are matched, this returns true. 
 	 * Otherwise, print authorization error message and return false
 	 */
-
-	
         @Override
-	public boolean authorize() {
-		//******************* YOUR CODE HERE ******************
-		return false;
-		//*****************************************************
+	public boolean authorize() 
+        {
+            if(this.user.equals(this.wallet.getUserName()) && this.pwd.hashCode() == (this.wallet.getEncodedPassword()))
+            {
+                return true;
+            }
+            System.out.println(Authorization.ERROR);
+            return false;
 	}
-	
-	
-	
-	
+
 	//**************************** DO NOT MODIFY **********************************//
 
     /**

@@ -3,6 +3,7 @@
  * @author Jirayu       Klinudom [6388085]
  * @author Perakorn     Nimitkul [6388127]
  * Section              2
+ * @Status              
  */
 public class PaymentCreditCard extends Payment implements Authorization {
 	
@@ -19,11 +20,10 @@ public class PaymentCreditCard extends Payment implements Authorization {
 	 * @param number (credit card's number)
 	 * @param type   (credit card's type)
 	 */
-	public PaymentCreditCard(double amount, String number, CreditCard.CardType type) {
-		//******************* YOUR CODE HERE ******************
-		
-		//*****************************************************
-		
+	public PaymentCreditCard(double amount, String number, CreditCard.CardType type) 
+        {
+            super("CARD",amount);
+            this.card = new CreditCard(number,type);
 	}
 	
 	/**
@@ -31,10 +31,10 @@ public class PaymentCreditCard extends Payment implements Authorization {
 	 * @param amount
 	 * @param c
 	 */
-	public PaymentCreditCard(double amount, CreditCard c) {
-		//******************* YOUR CODE HERE ******************
-		
-		//*****************************************************
+	public PaymentCreditCard(double amount, CreditCard c) 
+        {
+            super("CARD",amount);
+            this.card = c;
 	}
 	
 	/**
@@ -42,10 +42,14 @@ public class PaymentCreditCard extends Payment implements Authorization {
 	 * Otherwise, print the payment error message and return false.
 	 */
         @Override
-	public boolean paid() {
-		//******************* YOUR CODE HERE ******************
-		return false;
-		//*****************************************************
+	public boolean paid() 
+        {
+            if(authorize() && super.amount <= CreditCard.CARDLIMIT)
+            {
+                return true;
+            }
+            System.out.println(Payment.ERROR);
+            return false;
 	}
 	
 	
@@ -53,19 +57,18 @@ public class PaymentCreditCard extends Payment implements Authorization {
 	 * Unlike read-world case, if the card information is valid (see CreditCard class), return true.
 	 * If the card is invalid, print the authorization error message and return false.
 	 */
-	//@Override
         @Override
-	public boolean authorize() {
-		//******************* YOUR CODE HERE ******************
-		return false;
-		//*****************************************************
+	public boolean authorize() 
+        {
+            if(this.card.isValid())
+            {
+                return true;
+            }
+            System.out.print(Authorization.ERROR);
+            return false;
 	}
-	
-	
-	
-	
-	
-	
+
+        
 	//**************************** DO NOT MODIFY **********************************//
         @Override
 	public String toString() {

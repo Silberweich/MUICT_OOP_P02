@@ -3,6 +3,7 @@
  * @author Jirayu       Klinudom [6388085]
  * @author Perakorn     Nimitkul [6388127]
  * Section              2
+ * 
  */
 public class PaymentCash extends Payment{
 	
@@ -12,7 +13,6 @@ public class PaymentCash extends Payment{
 	private double change;		// If the cash tendered is more than the amount, the change have to be calculated
 	
 	//*****************************************************************************//
-	
 	/**
 	 * Constructor initializes the payment method's name as "CASH", 
          * paid amount, and cash tendered.The instant file "change" is set to 0 (no change is calculated yet)
