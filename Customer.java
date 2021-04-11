@@ -24,7 +24,7 @@ public class Customer {
             this.name = name;
             //normal runningID assignment
             Customer.runningID++;
-            this.custID = runningID;    
+            this.custID = runningID;  
 	}
 	
 	/**
@@ -39,7 +39,8 @@ public class Customer {
             //special case ID assigment
             if(id > Customer.runningID)
             {
-                this.custID = id; 
+                Customer.runningID = id;
+                this.custID = Customer.runningID;
             }
             else
             {

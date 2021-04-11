@@ -6,14 +6,12 @@
  */
 public class PaymentEWallet extends Payment implements Authorization  {
 	
-	
 	//**************************** DO NOT MODIFY **********************************//
 	private String user;		// username to verify this payment transaction
 	private String pwd;		// password to verify this payment transaction
 	private EWallet wallet;		// EWallet associated with this payment transaction
 	
 	//*****************************************************************************//
-	
 	
 	/**
 	 * Constructor initializes the payment method's name as "EWALLET", and paid amount as given amount value 

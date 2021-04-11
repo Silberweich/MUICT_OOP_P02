@@ -38,6 +38,7 @@ public class PaymentCash extends Payment{
             if(this.cashTendered > super.amount)
             {
                 this.change = this.cashTendered - super.amount;
+                return true;
             }
             System.out.println(Payment.ERROR);
             return false;	
