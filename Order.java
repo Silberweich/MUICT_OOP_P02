@@ -1,8 +1,11 @@
 /**
- * @author Phichayut    Ngoennim [6388035]
+ * @author Phichayut    Ngoennim [6388035] >>> MAIN CONTRIBUTOR
  * @author Jirayu       Klinudom [6388085]
  * @author Perakorn     Nimitkul [6388127]
  * Section              2
+ * 
+ * @status           >>>TASK 3 COMPLETED
+ * @note             >>>
  */
 import java.util.ArrayList;
 
@@ -29,24 +32,34 @@ public class Order {
 
 	/**
 	 * Constructor to initialize orderID according to the running ID
-	 * The first order's ID is 1. The second order's ID is 2, and so on. 
+	 * The first order's ID is 1. The second order's ID is 2, and so on.
+         * //DONE
 	 */
-	public Order() {
-		//******************* YOUR CODE HERE ******************
-		
-		//*****************************************************
+	public Order() 
+        {
+            Order.runningID++;
+            this.orderID = Order.runningID;
 	}
 	
 	/**
 	 * Constructor to initialize orderID as the given orderID parameter
 	 * If the provided order ID is larger than the running ID, the running ID will be set to equal to that provided ID. 
 	 * @param orderID
+         * //DONE
 	 */
 	
-	public Order(int orderID) {
-		//******************* YOUR CODE HERE ******************
-		
-		//*****************************************************
+	public Order(int orderID) 
+        {
+            //special case ID assigment
+            if(orderID > Order.runningID)
+            {
+                Order.runningID = orderID;
+                this.orderID = Order.runningID;
+            }
+            else
+            {
+                this.orderID = Order.runningID;
+            }
 	}
 	
 	/**
@@ -56,12 +69,26 @@ public class Order {
 	 * @param cid
 	 * @return return true if the customer can be set, otherwise return false
 	 */
-	public boolean setCustomerID(int cid) {
-		//******************* YOUR CODE HERE ******************
-		return false;
-		//*****************************************************
+	public boolean setCustomerID(int cid) 
+        {
+            for(Integer custID: DataManagement.customerData.keySet())
+            {
+                if(cid == custID)
+                {
+                    if(DataManagement.customerData.get(custID) instanceof CustomerOnline)
+                    {
+                        this.customer = new CustomerOnline(cid, DataManagement.customerData.get(custID).getName(),
+                                ((CustomerOnline) DataManagement.customerData.get(custID)).getDistance());     
+                    }
+                    else
+                    {
+                        this.customer = new Customer(cid, DataManagement.customerData.get(custID).getName());
+                    }
+                    return true;
+                } 
+            }
+            return false;
 	}
-	
 	
 	/**
 	 * For the new order, an item will be added into the items list and decrease the quantity of item in stock by one.
@@ -70,10 +97,18 @@ public class Order {
 	 * @param itemName is the name of item 
 	 * @return return true if the item can be added, otherwise return false.
 	 */
-	public boolean addItem(String itemName){
-		//******************* YOUR CODE HERE ******************
-		return false;
-		//*****************************************************
+	public boolean addItem(String itemName)
+        {
+            for(String iName: DataManagement.stockData.keySet())
+            {
+                if(itemName.equals(iName) && DataManagement.stockData.get(iName).isAvailable())
+                {
+                    this.items.add(DataManagement.stockData.get(iName));
+                    DataManagement.stockData.get(iName).sold();
+                    return true;
+                }
+            }
+            return false;
 	}
 	
 	
@@ -88,10 +123,24 @@ public class Order {
 	 * @param pastOrder indicates whether this is the past order or not
 	 * @return return true if the item can be added, otherwise return false.
 	 */
-	public boolean addItem(String itemName, boolean pastOrder){
-		//******************* YOUR CODE HERE ******************
-		return false;
-		//*****************************************************
+	public boolean addItem(String itemName, boolean pastOrder)
+        {
+            for(String iName: DataManagement.stockData.keySet())
+            {
+                if(itemName.equals(iName) && DataManagement.stockData.get(iName).isAvailable() && !pastOrder)
+                {
+                    this.items.add(DataManagement.stockData.get(iName));
+                    DataManagement.stockData.get(iName).sold();
+                    return true;
+                }
+                else if(itemName.equals(iName) && pastOrder)
+                {
+                    this.items.add(DataManagement.stockData.get(iName));
+                    //DataManagement.stockData.get(iName).sold();
+                    return true;
+                }
+            }
+            return false;
 	}
 	
 	/**
@@ -104,40 +153,91 @@ public class Order {
 	 * @param payment which can be either cash, credit card, or e-wallet
 	 * @return 
 	 */
-	public Status makePayment(Payment payment){
-		//******************* YOUR CODE HERE ******************
-		return null;
-		//*****************************************************
+	public Status makePayment(Payment payment)
+        {
+            switch(payment.method)
+            {
+                case "CASH":
+                {
+                    this.paymentMethod = "CASH";
+                    if(payment.paid())
+                    {
+                        return Status.PAID;
+                    }
+                }
+                    break;
+                case "CARD":
+                {
+                    this.paymentMethod = "CARD";
+                    if(payment.paid())
+                    {
+                        return Status.PAID;
+                    }
+                }
+                    break;
+                case "EWALLET":
+                {
+                    this.paymentMethod = "EWALLET";
+                    if(payment.paid())
+                    {             
+                       return Status.PAID; 
+                    }
+                }
+                    break;
+            }
+            return Status.VOIDED;	
 	}
 	
 	/**
 	 * Calculate the shipping for online customer by multiplying the distance with the SHIPPING_RATE
 	 * @return the value of shippingFee
 	 */
-	public double calShippingFee(){
-		//******************* YOUR CODE HERE ******************
-		return 0;
-		//*****************************************************
+	public double calShippingFee()
+        {
+            if(this.customer instanceof CustomerOnline)
+            {
+                double wow = SHIPPING_RATE * ((CustomerOnline) this.customer).getDistance();
+                System.out.println("shippy: " + wow );
+                this.shippingFee = wow;
+                return wow;
+                //return SHIPPING_RATE * this.customer.getDistance();
+            }
+            return 0;
 	}
 	
 	/**
 	 * Calculate the sub total by combining the price of all items in the list
 	 * @return the value of sub total in this order
 	 */
-	public double calSubTotal(){
-		//******************* YOUR CODE HERE ******************
-		return 0;
-		//*****************************************************
+	public double calSubTotal()
+        {
+            double bouf = 0;
+            for(Item ayethem: this.items)
+            {
+                bouf += ayethem.getPrice();
+            }
+            System.out.println("subtot: " +bouf);
+            this.subTotal = bouf;
+            return bouf;
 	}
 	
 	/**
 	 * Calculate the total tax amount from all taxable items. Tax amount of an item is the price * TAX_RATE
 	 * @return the total tax amount
 	 */
-	public double calTax(){
-		//******************* YOUR CODE HERE ******************
-		return 0;
-		//*****************************************************
+	public double calTax()
+        {
+            double bourguignon = 0;
+            for(Item ayethem: this.items)
+            {
+                if(ayethem.getTaxable())
+                {
+                    bourguignon += (ayethem.getPrice() * TAX_RATE);    
+                }
+            }
+            System.out.println("tax: " +bourguignon);
+            this.tax = bourguignon;
+            return bourguignon;
 	}
 	
 	/**

@@ -4,6 +4,10 @@
  * @author Perakorn     Nimitkul [6388127]
  * Section              2
  * 
+ * @status           >>>TASK 1 COMPLETED
+ * @status           >>>TASK 2 COMPLETED
+ * @Note             >>> import
+ * 
  * @import java.io.FileNotFoundException used for error detection during try-catch in reading files
  * @import java.util.Scanner to use scanner.nextline()
  */
@@ -282,12 +286,31 @@ public class DataManagement {
 	 * @return Map collection of orders read from the text file
 	 */
 	
-	public static Map<Integer, Order> initOrder(String filename) {
-		//******************* YOUR CODE HERE ******************
+	public static Map<Integer, Order> initOrder(String filename) 
+        {
+            //******************* YOUR CODE HERE ******************
+//            try 
+//            {
+//                File inputFile = new File(filename);
+//                Scanner reader = new Scanner(inputFile);
+//                //System.out.println("Boolean Result: "+reader.hasNextLine());    
+//
+//                while (reader.hasNextLine()) 
+//                {
+//                    String inputData = reader.nextLine();
+//                    String[] spltArr = inputData.split(",");
+//                    
+//                }
+//                reader.close();
+//            } 
+//            catch (FileNotFoundException e) 
+//            {
+//                System.out.println("Stock file not found");
+//                //e.printStackTrace();
+//            }		
+            return orderData;
 
-		return orderData;
-		
-		//*****************************************************
+            //*****************************************************
 		
 	}
 	
