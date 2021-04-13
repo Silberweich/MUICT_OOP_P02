@@ -5,10 +5,11 @@
  * Section              2
  * 
  * @status           >>>TASK 1 COMPLETED
+ *                   >>>TASK 5 ON GOING
  * @Note             >>>Small Confusion on runningID assignment
  */
 
-public class Customer {
+public class Customer implements Loggable{
 	
 	//**************************** DO NOT MODIFY **********************************//
 	public static int runningID = 0;	// static variable for assigning a unique ID to a customer
@@ -51,6 +52,16 @@ public class Customer {
                 this.custID = Customer.runningID;
             }
 	}
+       
+        /**
+         * 
+         * @return string containing info of non online customer 
+         */
+        @Override
+        public String log()
+        {
+            return this.custID + "," + this.name;
+        }
 	
 	//**************************** DO NOT MODIFY **********************************//
 	public int getCustID() {

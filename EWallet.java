@@ -5,11 +5,12 @@
  * Section              2
  * 
  * @status           >>>TASK 1 COMPLETED
+ *                   >>>TASK 5 ON GOING
  * @Note             >>>Nothing much to say here just followed the instruction
  *                      and run the test case successfully
  */
 
-public class EWallet {
+public class EWallet implements Loggable{
 	
 	//**************************** DO NOT MODIFY **********************************//
 	private int custID;		// customer's ID who owns this wallet
@@ -85,6 +86,11 @@ public class EWallet {
             System.out.println("Cannot deduct balance. Incorrect amount!");
             return false;		
 	}
+        
+        public String log()
+        {
+            return this.custID + "," + this.username + "," + this.password + "," + this.balance;
+        }
 	
 	//**************************** DO NOT MODIFY **********************************//
 	

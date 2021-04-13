@@ -5,11 +5,12 @@
  * Section              2
  * 
  * @status           >>>TASK 1 COMPLETED
+ *                   >>>TASK 5 ON GOING
  * @Note             >>>Nothing much to say here just followed the instruction
  *                      and run the test case successfully
  */
 
-public class CustomerOnline extends Customer {
+public class CustomerOnline extends Customer{
 	
 	//**************************** DO NOT MODIFY **********************************//
 	private double distance;	// delivery distance
@@ -38,6 +39,16 @@ public class CustomerOnline extends Customer {
             super(id,name);
             this.distance = distance;
 	}
+        
+        /**
+         * 
+         * @return string containing info of an online customer
+         */
+        @Override
+        public String log()
+        {
+            return super.getCustID() + "," + super.getName() + "," + this.distance;
+        }
 	
 	//**************************** DO NOT MODIFY **********************************//
 	public double getDistance() {

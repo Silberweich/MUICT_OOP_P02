@@ -5,11 +5,12 @@
  * Section              2
  * 
  * @status           >>>TASK 1 COMPLETED
+ *                   >>>TASK 5 ON GOING
  * @Note             >>>Nothing much to say here just followed the instruction
  *                      and run the test case successfully
  */
 
-public class Item {
+public class Item implements Loggable{
 	
 	//**************************** DO NOT MODIFY **********************************//
 	private String name;				// item's name
@@ -84,6 +85,16 @@ public class Item {
             this.qty += 1;
             return this.qty;
 	}
+        
+        /**
+         * 
+         * @return string of completed data
+         */
+        @Override
+        public String log()
+        {
+            return this.name + "," + this.price + "," + this.taxable + "," + this.qty;
+        }
 	
 	
 	//**************************** DO NOT MODIFY **********************************//

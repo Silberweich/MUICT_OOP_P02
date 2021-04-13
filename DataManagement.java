@@ -1,11 +1,12 @@
 /**
- * @author Phichayut    Ngoennim [6388035]
+ * @author Phichayut    Ngoennim [6388035] >>> TASK 5
  * @author Jirayu       Klinudom [6388085]
- * @author Perakorn     Nimitkul [6388127]
+ * @author Perakorn     Nimitkul [6388127] >>> MAIN CONTRIBUTOR
  * Section              2
  * 
  * @status           >>>TASK 1 COMPLETED
  * @status           >>>TASK 2 COMPLETED
+ * @status           >>>TASK 5 ON GOING
  * @Note             >>> import
  * 
  * @import java.io.FileNotFoundException used for error detection during try-catch in reading files
@@ -370,8 +371,7 @@ public class DataManagement {
 	 * @param append: whether append the text file or not
 	 * @param items: list of items
 	 */
-	public static void storeItems(
-			String filename, Boolean append, List<Item> items) {
+	public static void storeItems(String filename, Boolean append, List<Item> items) {
 		//******************* YOUR CODE HERE ******************
 		
 		//***************************************************** 
@@ -386,8 +386,7 @@ public class DataManagement {
 	 * @param append
 	 * @param customers
 	 */
-	public static void storeCustomers(
-			String filename, Boolean append, List<Customer> customers) {
+	public static void storeCustomers(String filename, Boolean append, List<Customer> customers) {
 		
 		//******************* YOUR CODE HERE ******************
 		
@@ -403,8 +402,7 @@ public class DataManagement {
 	 * @param append
 	 * @param wallets
 	 */
-	public static void storeEWallets(
-			String filename, Boolean append, List<EWallet> wallets) {
+	public static void storeEWallets(String filename, Boolean append, List<EWallet> wallets) {
 		
 		//******************* YOUR CODE HERE ******************
 		
@@ -420,8 +418,7 @@ public class DataManagement {
 	 * @param orders
 	 */
 	
-	public static void storeOrders(
-			String filename, Boolean append, List<Order> orders) {
+	public static void storeOrders(String filename, Boolean append, List<Order> orders) {
 		
 		//******************* YOUR CODE HERE ******************
 		

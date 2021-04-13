@@ -5,11 +5,12 @@
  * Section              2
  * 
  * @status           >>>TASK 3 COMPLETED
+ *                   >>>TASK 5 ONGOING
  * @note             >>>
  */
 import java.util.ArrayList;
 
-public class Order {
+public class Order implements Loggable{
 	
 	//**************************** DO NOT MODIFY **********************************//
 	public static int runningID = 0;					// static variable for assigning a unique ID to an order
@@ -251,6 +252,38 @@ public class Order {
 		grandTotal = subTotal + tax + shippingFee;
 		return grandTotal;
 	}
+        
+        /**
+         * 
+         * @return string with order info
+         */
+        @Override
+        public String log()
+        {
+            String itemListz = "";
+            int counter = 0;
+            for(Item iName: this.items)
+            {
+                if(this.items.size() == 1)
+                {
+                    itemListz = itemListz + iName.getName();
+                }
+                else // item.size() > 1
+                {
+                    if(counter < this.items.size()) // not last
+                    {
+                       itemListz = itemListz + iName.getName() + "|"; 
+                       counter++;
+                    }
+                    else // last
+                    {
+                       itemListz = itemListz + iName.getName();
+                    }
+                }
+            }
+            return this.orderID + "," + this.customer.getCustID() + "," 
+                    + itemListz + "," + this.paymentStatus + "::" + this.paymentMethod;
+        }
 
 	
 	//**************************** DO NOT MODIFY **********************************//
