@@ -87,9 +87,11 @@ public class EWallet implements Loggable{
             return false;		
 	}
         
+        @Override
         public String log()
         {
-            return this.custID + "," + this.username + "," + this.password + "," + this.balance;
+            String credits = df.format(this.balance);
+            return this.custID + "," + this.username + "," + this.password + "," + credits;
         }
 	
 	//**************************** DO NOT MODIFY **********************************//

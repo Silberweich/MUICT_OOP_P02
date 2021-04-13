@@ -47,7 +47,8 @@ public class CustomerOnline extends Customer{
         @Override
         public String log()
         {
-            return super.getCustID() + "," + super.getName() + "," + this.distance;
+            String dist = df.format(this.distance);
+            return super.getCustID() + "," + super.getName() + "," + dist;
         }
 	
 	//**************************** DO NOT MODIFY **********************************//

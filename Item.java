@@ -93,7 +93,8 @@ public class Item implements Loggable{
         @Override
         public String log()
         {
-            return this.name + "," + this.price + "," + this.taxable + "," + this.qty;
+            String credits = df.format(this.price);
+            return this.name + "," + credits + "," + this.taxable + "," + this.qty;
         }
 	
 	
