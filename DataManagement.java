@@ -11,11 +11,21 @@
  * 
  * @import java.io.FileNotFoundException used for error detection during try-catch in reading files
  * @import java.util.Scanner to use scanner.nextline()
+ * 
+ * FOR TASK 5
+ * @import java.io.BufferedWriter;
+ * @import java.io.FileOutputStream;
+ * @import java.io.OutputStreamWriter;
+ * @import java.io.OutputStream;
  */
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -360,8 +370,53 @@ public class DataManagement {
 		}
 	    
 	}
-	//*****************************************************************************//
 	
+        //*****************************************************************************//
+        //*****************************************************************************//
+        //*****************************************************************************//
+        /**
+         * EZPringLog was made to facilitate the process of log printing, see param below...
+         * Rather than have every store.. method have their printing, we put all the printing 
+         * right in this method.
+         * same input parameter as all the store.. method but list is arraylist of string extracted
+         * from each store.. method.
+         * @author Phichayut    Ngoennim [6388035]
+         * @param filename
+         * @param append
+         * @param list 
+         */
+	public static void EZPrintLog(String filename, Boolean append, ArrayList<String> list)
+        {
+            File file = new File(filename);
+            FileWriter fWrite = null;
+            try
+            {
+                if(append)//append
+                {
+                    fWrite = new FileWriter(file, true);
+                    for(String l: list)
+                    {
+                        fWrite.write(l);
+                        fWrite.write(System.getProperty( "line.separator" ));
+                    }
+                    fWrite.close();
+                }
+                else// dont append
+                {
+                    fWrite = new FileWriter(file, false);
+                    for(String l: list)
+                    {
+                        fWrite.write(l);
+                        fWrite.write(System.getProperty( "line.separator" ));
+                    }
+                    fWrite.close();
+                } 
+            }
+            catch(IOException e)
+            {
+                System.out.println("IO exception lmao");
+            }
+        }
 	/**
 	 * Write the list of items into the given text file
 	 * If the append is true, the list of items will be appended into the existing log file
@@ -371,10 +426,13 @@ public class DataManagement {
 	 * @param append: whether append the text file or not
 	 * @param items: list of items
 	 */
-	public static void storeItems(String filename, Boolean append, List<Item> items) {
-		//******************* YOUR CODE HERE ******************
-		
-		//***************************************************** 
+	public static void storeItems(String filename, Boolean append, List<Item> items) 
+        {
+            ArrayList<String> owo = new ArrayList<>();
+            items.forEach(temp -> {
+                owo.add(temp.log());
+            });
+            EZPrintLog(filename,append,owo);
 	}
 	
 	/**
@@ -386,11 +444,13 @@ public class DataManagement {
 	 * @param append
 	 * @param customers
 	 */
-	public static void storeCustomers(String filename, Boolean append, List<Customer> customers) {
-		
-		//******************* YOUR CODE HERE ******************
-		
-		//*****************************************************
+	public static void storeCustomers(String filename, Boolean append, List<Customer> customers)
+        {
+            ArrayList<String> owo = new ArrayList<>();
+            customers.forEach(temp -> {
+                owo.add(temp.log());
+            });
+            EZPrintLog(filename,append,owo);   
 	}
 	
 	/**
@@ -402,11 +462,13 @@ public class DataManagement {
 	 * @param append
 	 * @param wallets
 	 */
-	public static void storeEWallets(String filename, Boolean append, List<EWallet> wallets) {
-		
-		//******************* YOUR CODE HERE ******************
-		
-		//*****************************************************
+	public static void storeEWallets(String filename, Boolean append, List<EWallet> wallets) 
+        {
+            ArrayList<String> owo = new ArrayList<>();
+            wallets.forEach(temp -> {
+                owo.add(temp.log());
+            });
+            EZPrintLog(filename,append,owo);
 	}
 	
 	/**
@@ -414,20 +476,24 @@ public class DataManagement {
 	 * If the append is true, the list of orders will be appended into the existing log file
 	 * Otherwise, the content in the existing log file will be replaced with this new list of orders.
 	 * 
+         * @param filename
 	 * @param append
 	 * @param orders
 	 */
 	
-	public static void storeOrders(String filename, Boolean append, List<Order> orders) {
-		
-		//******************* YOUR CODE HERE ******************
-		
-		//*****************************************************
+	public static void storeOrders(String filename, Boolean append, List<Order> orders) 
+        {
+            ArrayList<String> owo = new ArrayList<>();
+            orders.forEach(temp -> {
+                owo.add(temp.log());
+            });
+            EZPrintLog(filename,append,owo);
 	}
-	
-
-	
-	
+        
+        //*****************************************************************************//
+        //*****************************************************************************//
+        //*****************************************************************************//
+        
 	/**
 	 * Filter the orders data (in the Map Collection) by the order's status and/or payment method
 	 * and calculate the summation of the sub-total amount of those filtered ordered.
@@ -444,7 +510,7 @@ public class DataManagement {
 		
 		//*****************************************************
 		
-	}
+        }
 	
 	/**
 	 * Filter the orders data (in the Map Collection) by the order's status and/or payment method
