@@ -65,9 +65,10 @@ public class DataManagement {
 	//*****************************************************************************//
         
         /** * ADDITIONAL METHOD
-	 * Validates input from given string.If a 
- Note that customer can be either general customer or an online customer.
+	 * Validates input from given string, using dataType param to tell the switch
+         * on which regex should the string compare to
 	 * 
+         * @author Perakorn Nimitkul [6388127]
 	 * @param input passed from init methods
          * @param dataType tells filter what type this will be filtered for
 	 * @return returnOperand according to the assigned values designated for each operation
@@ -107,89 +108,107 @@ public class DataManagement {
                     {
                         returnOperand = "T:Plain";
                     } */
+                    break;
                 }
                 
                 case "Stock": //Stock
                 {
+                    //System.out.println("******PROCESSING STOCK LINE******");
+                    //System.out.println("STOCKLine: "+input);
                     if(input.matches("^[a-z\\s]+,\\d+\\.\\d{2},(true|false),\\d+"))
                     {
                         returnOperand = "T:Stock";
                                                     //System.out.println("+1");
                     } 
+                    break;
                 }
                 
                 case "Order": //Order
                 {
                     Boolean inputVoided = false; //used to check illegal input
-                    System.out.println("Line: "+input);
-                    String[] orderStringSplt = input.split(",");	
-                    //System.out.print("ID: "+orderStringSplt[0]+"\n CUSTID: "+orderStringSplt[1]);
+                    System.out.println("******PROCESSING ORDER LINE******");
+                    System.out.println("ORDERLine: "+input);
+                    String[] orderStringSplt = input.split(",");
+                    String[] itemsStringSplt = orderStringSplt[2].split("\\|");
+                    String[] paymentStringSplt = orderStringSplt[3].split("::");
+                    System.out.print("ID: "+orderStringSplt[0]+"\nCUSTID: "+orderStringSplt[1]+"\nITEMS: "+orderStringSplt[2]);
                     
                     if(orderStringSplt[0].matches("\\d+") && orderStringSplt[1].matches("\\d+") && orderStringSplt.length == 4) //Validate OrderID and Cust.ID, also validate length
                     {
-                        String[] itemsStringSplt = orderStringSplt[2].split("\\|");
-                        String[] paymentStringSplt = orderStringSplt[3].split("::");
-                        System.out.println("Ids Validated!");
-                        if(orderStringSplt[2].matches("[a-zA-Z]+[\\|]?+")) //Validate that itemString has no illegal character
+                        
+                        System.out.println("\nIds Validated!");
+                        if(orderStringSplt[2].matches("[a-z\\| ]+")) //Validate that itemString has no illegal character
                         {
                             System.out.println("ItemString Validated!");
                             for(int i = 0; i < itemsStringSplt.length; i++) //Loop validate individual items
                             {
-				if(!itemsStringSplt[i].matches("[a-zA-Z] +"))//Check if the individual items contains illegal character
+				if(itemsStringSplt[i].matches("[^a-zA-Z ]+"))//Check if the individual items contains illegal character
                                 {
                                     inputVoided = true;//if theres an invalid char, input is voided
+                                    System.out.println("BADDDDD");
                                     break;
 				} 
                             }
-                            if(!inputVoided && orderStringSplt[3].matches("[a-zA-Z]+::[a-zA-Z]+")) //input is voided? if not, does the PpaymentStringSplt contains illegal char?
+                            if(!inputVoided && orderStringSplt[3].matches("[A-Z]+::[A-Z]+")) //input is voided? if not, does the PpaymentStringSplt contains illegal char?
                             {
+                                System.out.println("Status Validating...");
+                                System.out.println(paymentStringSplt[0]);
                                switch(paymentStringSplt[0]) 
                                {
-                                    case "UNKNOWN":
-                                        inputVoided = false;
-                                        break;
-                                    case "CASH":
-					inputVoided = false;
-					break;
-                                    case "CARD":
-					inputVoided = false;
-					break;
-                                    case "EWALLET":
-					inputVoided = false;
-					break;
-                                    default:
-                                        inputVoided = true; //BAD INPUT
-                                        break;
+                                   case "VOIDED":
+                                            inputVoided = false;
+                                            break;
+                                   case "PENDING":
+                                            inputVoided = false;
+                                            break;
+                                   case "PAID":
+                                            inputVoided = false;
+                                            break;
+                                   default:
+                                            inputVoided = true;//BAD INPUT
+                                            break;
 				}
                                if(!inputVoided)// is the first index of paymentStringSplt voided? if not, keeps validating
                                {
-                                    switch(paymentStringSplt[1]) 
+                                   System.out.println("Status Validated! Now Type...");
+                                   switch(paymentStringSplt[1]) 
                                     {
-                                        case "VOIDED":
-                                            inputVoided = false;
-                                            break;
-                                        case "PENDING":
-                                            inputVoided = false;
-                                            break;
-                                        case "PAID":
-                                            inputVoided = false;
-                                            break;
-                                        default:
-                                            inputVoided = true;//BAD INPUT
-                                            break;    
+                                           case "UNKNOWN":
+                                                inputVoided = false;
+                                                break;
+                                           case "CASH":
+                                                inputVoided = false;
+                                                break;
+                                           case "CARD":
+                                                inputVoided = false;
+                                                break;
+                                           case "EWALLET":
+                                                inputVoided = false;
+                                                break;
+                                            default:
+                                                inputVoided = true; //BAD INPUT
+                                                break;  
                                     }
                                }
                                
                                if(!inputVoided) //Final check, if not void then this string is a legal input
                                {
                                    returnOperand = "T:Order";
+                                   System.out.println("+++++LEGIT++++++");
                                }
                                else
+                               {
                                    returnOperand = "BAD_INPUT";
+                                   System.out.println("-------BAD-------");
+                               }
                             }
                         }
                     }    
                 }
+                break;
+                default:
+                       returnOperand = "BAD_INPUT"; 
+                       break;
             }
             
             return returnOperand;
@@ -331,6 +350,7 @@ public class DataManagement {
                     while (reader.hasNextLine()) 
                     {
                         String inputData = reader.nextLine();
+                        //System.out.println("THIS IS STOCK: "+inputData);
                         String[] spltArr = inputData.split(",");
                         
                         switch (filter(inputData,"Stock"))
@@ -382,16 +402,25 @@ public class DataManagement {
                 while (reader.hasNextLine()) 
                {
                     String inputData = reader.nextLine();
-                    String[] spltArr = inputData.split(",");
-                    System.out.println("Lineeee: "+inputData);
+                    
+                    String[] orderStringSplt = inputData.split(",");
+                    String[] itemsStringSplt = orderStringSplt[2].split("\\|");
+                    String[] paymentStringSplt = orderStringSplt[3].split("::");
+                    
+                    System.out.println("THIS IS ORDER: "+inputData);
                     switch (filter(inputData,"Order"))
                         {
                             case "T:Order":
                             {
-                                continue;
-                                //stockData.put(spltArr[0], new Item(spltArr[0] , Double.parseDouble(spltArr[1]) , Boolean.parseBoolean(spltArr[2]) , Integer.parseInt(spltArr[3]) ) );
+                                
+                                orderData.put(Integer.parseInt(orderStringSplt[0]), new Order(Integer.parseInt(orderStringSplt[0])));
+                                orderData.get(Integer.parseInt(orderStringSplt[0])).setCustomerID(Integer.parseInt(orderStringSplt[1]));
+                                for(String item: itemsStringSplt)
+                                {
+                                    orderData.get(Integer.parseInt(orderStringSplt[0])).addItem(item,true);
+                                }
                             }
-                            //break;
+                            break;
                             default:
                                 continue;
                         }
