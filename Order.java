@@ -264,7 +264,7 @@ public class Order implements Loggable{
         public String log()
         {
             String itemListz = "";
-            int counter = 0;
+            int counter = 1;
             for(Item iName: this.items)
             {
                 if(this.items.size() == 1)
