@@ -51,7 +51,7 @@ public class Customer implements Loggable{
             }
             else
             {
-                this.custID = id; //FIXED: Wrong value assignment: corrected running ID to the param id
+                this.custID = id; //+FIXED: Wrong value assignment: corrected running ID to the param id
             }
 	}
        

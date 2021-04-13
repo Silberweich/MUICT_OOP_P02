@@ -5,7 +5,7 @@
  * Section              2
  * 
  * @status           >>>TASK 1 COMPLETED
- *                   >>>TASK 5 ON GOING
+ *                   >>>TASK 5 COMPLETED
  * @Note             >>>Nothing much to say here just followed the instruction
  *                      and run the test case successfully
  */

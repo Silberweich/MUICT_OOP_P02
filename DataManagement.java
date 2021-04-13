@@ -1,6 +1,6 @@
 /**
  * @author Phichayut    Ngoennim [6388035] >>> TASK 5
- * @author Jirayu       Klinudom [6388085]
+ * @author Jirayu       Klinudom [6388085] >>> TASK 4 VALIDATION SKELETAL
  * @author Perakorn     Nimitkul [6388127] >>> MAIN CONTRIBUTOR
  * Section              2
  * 
@@ -118,9 +118,82 @@ public class DataManagement {
                     } 
                 }
                 
+                case "Order": //Order
+                {
+                    Boolean inputVoided = false; //used to check illegal input
+                    System.out.println("Line: "+input);
+                    String[] orderStringSplt = input.split(",");	
+                    //System.out.print("ID: "+orderStringSplt[0]+"\n CUSTID: "+orderStringSplt[1]);
+                    
+                    if(orderStringSplt[0].matches("\\d+") && orderStringSplt[1].matches("\\d+") && orderStringSplt.length == 4) //Validate OrderID and Cust.ID, also validate length
+                    {
+                        String[] itemsStringSplt = orderStringSplt[2].split("\\|");
+                        String[] paymentStringSplt = orderStringSplt[3].split("::");
+                        System.out.println("Ids Validated!");
+                        if(orderStringSplt[2].matches("[a-zA-Z]+[\\|]?+")) //Validate that itemString has no illegal character
+                        {
+                            System.out.println("ItemString Validated!");
+                            for(int i = 0; i < itemsStringSplt.length; i++) //Loop validate individual items
+                            {
+				if(!itemsStringSplt[i].matches("[a-zA-Z] +"))//Check if the individual items contains illegal character
+                                {
+                                    inputVoided = true;//if theres an invalid char, input is voided
+                                    break;
+				} 
+                            }
+                            if(!inputVoided && orderStringSplt[3].matches("[a-zA-Z]+::[a-zA-Z]+")) //input is voided? if not, does the PpaymentStringSplt contains illegal char?
+                            {
+                               switch(paymentStringSplt[0]) 
+                               {
+                                    case "UNKNOWN":
+                                        inputVoided = false;
+                                        break;
+                                    case "CASH":
+					inputVoided = false;
+					break;
+                                    case "CARD":
+					inputVoided = false;
+					break;
+                                    case "EWALLET":
+					inputVoided = false;
+					break;
+                                    default:
+                                        inputVoided = true; //BAD INPUT
+                                        break;
+				}
+                               if(!inputVoided)// is the first index of paymentStringSplt voided? if not, keeps validating
+                               {
+                                    switch(paymentStringSplt[1]) 
+                                    {
+                                        case "VOIDED":
+                                            inputVoided = false;
+                                            break;
+                                        case "PENDING":
+                                            inputVoided = false;
+                                            break;
+                                        case "PAID":
+                                            inputVoided = false;
+                                            break;
+                                        default:
+                                            inputVoided = true;//BAD INPUT
+                                            break;    
+                                    }
+                               }
+                               
+                               if(!inputVoided) //Final check, if not void then this string is a legal input
+                               {
+                                   returnOperand = "T:Order";
+                               }
+                               else
+                                   returnOperand = "BAD_INPUT";
+                            }
+                        }
+                    }    
+                }
             }
+            
             return returnOperand;
-        }
+        }    
 	
 	/**
 	 * Reads data line by line from the text file.
@@ -202,12 +275,12 @@ public class DataManagement {
                     File inputFile = new File(filename);
                     Scanner reader = new Scanner(inputFile);
                     //System.out.println("Boolean Result: "+reader.hasNextLine());    
-
+                        
                     while (reader.hasNextLine()) 
                     {
                         String inputData = reader.nextLine();
                         String[] spltArr = inputData.split(",");
-                        
+ 
                         switch (filter(inputData,"Wallet"))
                         {
                             case "T:Encodded":
@@ -300,25 +373,36 @@ public class DataManagement {
 	public static Map<Integer, Order> initOrder(String filename) 
         {
             //******************* YOUR CODE HERE ******************
-//            try 
-//            {
-//                File inputFile = new File(filename);
-//                Scanner reader = new Scanner(inputFile);
-//                //System.out.println("Boolean Result: "+reader.hasNextLine());    
-//
-//                while (reader.hasNextLine()) 
-//                {
-//                    String inputData = reader.nextLine();
-//                    String[] spltArr = inputData.split(",");
-//                    
-//                }
-//                reader.close();
-//            } 
-//            catch (FileNotFoundException e) 
-//            {
-//                System.out.println("Stock file not found");
-//                //e.printStackTrace();
-//            }		
+            try 
+            {
+                File inputFile = new File(filename);
+                Scanner reader = new Scanner(inputFile);
+                //System.out.println("Boolean Result: "+reader.hasNextLine());    
+
+                while (reader.hasNextLine()) 
+               {
+                    String inputData = reader.nextLine();
+                    String[] spltArr = inputData.split(",");
+                    System.out.println("Lineeee: "+inputData);
+                    switch (filter(inputData,"Order"))
+                        {
+                            case "T:Order":
+                            {
+                                continue;
+                                //stockData.put(spltArr[0], new Item(spltArr[0] , Double.parseDouble(spltArr[1]) , Boolean.parseBoolean(spltArr[2]) , Integer.parseInt(spltArr[3]) ) );
+                            }
+                            //break;
+                            default:
+                                continue;
+                        }
+                }
+                reader.close();
+            } 
+            catch (FileNotFoundException e) 
+            {
+                System.out.println("Stock file not found");
+                //e.printStackTrace();
+            }		
             return orderData;
 
             //*****************************************************
