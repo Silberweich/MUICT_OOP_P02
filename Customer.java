@@ -1,12 +1,14 @@
 /**
  * @author Phichayut    Ngoennim [6388035] >>> MAIN CONTRIBUTOR
- * @author Jirayu       Klinudom [6388085]
- * @author Perakorn     Nimitkul [6388127]
+ * @author Jirayu       Klinudom [6388085] >>> DEBUG AND CHECK
+ * @author Perakorn     Nimitkul [6388127] >>> DEBUG CLEAN-UP AND DOCUMENTATION
  * Section              2
  * 
  * @status           >>>TASK 1 COMPLETED
- *                   >>>TASK 5 ON GOING
- * @Note             >>>Small Confusion on runningID assignment
+ *                   >>>TASK 5 COMPLETED
+ * @Note             >>>Small Confusion on runningID assignment, fixed the issue
+ *                   >>>TASK 5 Debug: line 53: changed this.custID = Customer.runningID; to this.custID = id; 
+ *                      Wrong ID assignment results in wrong ID (runningID instead of real ID) of customer instantiated by using Customer(int id, String name) 
  */
 
 public class Customer implements Loggable{
@@ -49,7 +51,7 @@ public class Customer implements Loggable{
             }
             else
             {
-                this.custID = Customer.runningID;
+                this.custID = id; //FIXED: Wrong value assignment: corrected running ID to the param id
             }
 	}
        

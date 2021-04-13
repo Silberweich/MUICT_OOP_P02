@@ -1,12 +1,14 @@
 /**
  * @author Phichayut    Ngoennim [6388035] >>> MAIN CONTRIBUTOR
- * @author Jirayu       Klinudom [6388085]
- * @author Perakorn     Nimitkul [6388127]
+ * @author Jirayu       Klinudom [6388085] >>> DEBUG AND CHECK
+ * @author Perakorn     Nimitkul [6388127] >>> DEBUG CLEAN-UP AND DOCUMENTATION
  * Section              2
  * 
  * @status           >>>TASK 3 COMPLETED
- *                   >>>TASK 5 ONGOING
- * @note             >>>
+ *                   >>>TASK 5 COMPLETED
+ * 
+ * @note             >>>Minor return bug during makePayment method, fixed by changing return value from enumerator Status
+ *                      to return this.paymentStatus that has been modified in switch case instead
  */
 import java.util.ArrayList;
 
@@ -156,6 +158,7 @@ public class Order implements Loggable{
 	 */
 	public Status makePayment(Payment payment)
         {
+            this.paymentStatus = Status.VOIDED; //+Changed Status from PENDING to VOIDED Status
             switch(payment.method)
             {
                 case "CASH":
@@ -163,7 +166,7 @@ public class Order implements Loggable{
                     this.paymentMethod = "CASH";
                     if(payment.paid())
                     {
-                        return Status.PAID;
+                        this.paymentStatus = Status.PAID; //-Removed direct return;, changed to this.paymentStatus value reassignment instead
                     }
                 }
                     break;
@@ -172,7 +175,7 @@ public class Order implements Loggable{
                     this.paymentMethod = "CARD";
                     if(payment.paid())
                     {
-                        return Status.PAID;
+                        this.paymentStatus = Status.PAID; //-Removed direct return;, changed to this.paymentStatus value reassignment instead
                     }
                 }
                     break;
@@ -181,12 +184,12 @@ public class Order implements Loggable{
                     this.paymentMethod = "EWALLET";
                     if(payment.paid())
                     {             
-                       return Status.PAID; 
+                       this.paymentStatus= Status.PAID; //-Removed direct return;, changed to this.paymentStatus value reassignment instead
                     }
                 }
                     break;
             }
-            return Status.VOIDED;	
+            return this.paymentStatus;	//changed direct return value to return  this.paymentStatus  instead
 	}
 	
 	/**
