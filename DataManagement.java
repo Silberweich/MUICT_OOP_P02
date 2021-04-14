@@ -26,6 +26,8 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -701,7 +703,7 @@ public class DataManagement {
         {
             //******************* YOUR CODE HERE ******************
             ArrayList<Order> unsort = new ArrayList<>();
-            
+            int k = 0;
             for(Integer key: DataManagement.orderData.keySet())
             {
                 if(DataManagement.orderData.get(key).getPaymentStatus() == Order.Status.PAID)
@@ -709,33 +711,43 @@ public class DataManagement {
                     unsort.add(DataManagement.orderData.get(key));
                 }
             }
-            
-            //sorting below
+            Order[] unsortA = new Order[unsort.size()];
+            for(Order a: unsort)
+            {
+                unsortA[k] = a;
+                k++;
+            }
             
             ArrayList<Order> sorted = new ArrayList<>();
             
+            int n = unsortA.length;  
+                Order temp = null;  
+                for(int i=0; i < n; i++)
+                {  
+                    for(int j=1; j < (n-i); j++)
+                    {  
+                        if(unsortA[j-1].calGrandTotal() > unsortA[j].calGrandTotal())
+                        {  
+                            //swap elements  
+                            temp = unsortA[j-1];  
+                            unsortA[j-1] = unsortA[j];  
+                            unsortA[j] = temp;  
+                        }            
+                    }  
+                }
+            
             if(asc)//min to max
             {
-                double current = 0;
-                for(Order n: unsort)
+                for(int l = 0 ; l < n ; l++)
                 {
-                    if(n.calGrandTotal() > current)
-                    {
-                        sorted.add(n);
-                    }
-                    current = n.calGrandTotal();
-                } 
+                    sorted.add(unsortA[l]);
+                }
             }
             else//max to min
             {
-                double current = Double.MAX_VALUE;
-                for(Order n: unsort)
+                for(int l = n ; l > -1  ; l--)
                 {
-                    if(n.calGrandTotal() < current)
-                    {
-                        sorted.add(n);
-                    }
-                    current = n.calGrandTotal();
+                    sorted.add(unsortA[l]);
                 }
             }
             return sorted;
