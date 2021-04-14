@@ -6,8 +6,11 @@
  * 
  * @status           >>>TASK 1 COMPLETED
  *                   >>>TASK 5 COMPLETED
+ *                   >>>PROJECT CONCLUDED
+ * 
  * @Note             >>>Nothing much to say here just followed the instruction
  *                      and run the test case successfully
+ *                   >>>Not much fixing to be made on task 5
  */
 
 public class Item implements Loggable{
@@ -87,7 +90,7 @@ public class Item implements Loggable{
 	}
         
         /**
-         * 
+         *
          * @return string of completed data
          */
         @Override

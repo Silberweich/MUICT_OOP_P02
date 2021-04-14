@@ -1,6 +1,6 @@
 /**
- * @author Phichayut    Ngoennim [6388035] >>> TASK 5
- * @author Jirayu       Klinudom [6388085] >>> TASK 4 VALIDATION SKELETAL
+ * @author Phichayut    Ngoennim [6388035] >>> TASK 5 and TASK 6
+ * @author Jirayu       Klinudom [6388085] >>> TASK 4 VALIDATION SKELETAL and TASK 6 DEBUG
  * @author Perakorn     Nimitkul [6388127] >>> MAIN CONTRIBUTOR
  * Section              2
  * 
@@ -8,7 +8,9 @@
  * @status           >>>TASK 2 COMPLETED
  * @status           >>>TASK 5 COMPLETED
  *                   >>>TASK 6 COMPLETED
- * @Note             >>> import
+ *                   >>>PROJECT CONCLUDED
+ * 
+ * @Note             >>> There is so much to talk about
  * 
  * @import java.io.FileNotFoundException used for error detection during try-catch in reading files
  * @import java.util.Scanner to use scanner.nextline()
@@ -22,8 +24,6 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -492,6 +492,7 @@ public class DataManagement {
          * ACTUALLY, MINE IS COOL, I PRINT ARRAY LIST OF STRING
          * 
          * @author Phichayut    Ngoennim [6388035]
+         * 
          * @param filename
          * @param append
          * @param list 
@@ -519,6 +520,8 @@ public class DataManagement {
 	 * Write the list of items into the given text file
 	 * If the append is true, the list of items will be appended into the existing log file
 	 * Otherwise, the content in the existing log file will be replaced with this new list of items.
+         * 
+         * @author Phichayut    Ngoennim [6388035]
 	 * 
 	 * @param filename
 	 * @param append: whether append the text file or not
@@ -537,6 +540,8 @@ public class DataManagement {
 	 * Write the list of customers into the given text file
 	 * If the append is true, the list of customers will be appended into the existing log file
 	 * Otherwise, the content in the existing log file will be replaced with this new list of customers.
+         * 
+         * @author Phichayut    Ngoennim [6388035] 
 	 *   
 	 * @param filename
 	 * @param append
@@ -555,6 +560,8 @@ public class DataManagement {
 	 * Write the list of wallets into the given text file
 	 * If the append is true, the list of wallets will be appended into the existing log file
 	 * Otherwise, the content in the existing log file will be replaced with this new list of wallets.
+         * 
+         * @author Phichayut    Ngoennim [6388035]
 	 * 
 	 * @param filename
 	 * @param append
@@ -573,6 +580,8 @@ public class DataManagement {
 	 * Write the list of orders into the given text file
 	 * If the append is true, the list of orders will be appended into the existing log file
 	 * Otherwise, the content in the existing log file will be replaced with this new list of orders.
+         * 
+         * @author Phichayut    Ngoennim [6388035]
 	 * 
          * @param filename
 	 * @param append

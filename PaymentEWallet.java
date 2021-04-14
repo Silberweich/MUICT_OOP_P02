@@ -5,6 +5,7 @@
  * Section              2
  * 
  * @status           >>>TASK 1 COMPLETED
+ *                   >>>PROJECT CONCLUDED
  * @Note             >>>almost forgot to do the hashCode()
  */
 

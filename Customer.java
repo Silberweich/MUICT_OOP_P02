@@ -6,6 +6,8 @@
  * 
  * @status           >>>TASK 1 COMPLETED
  *                   >>>TASK 5 COMPLETED
+ *                   >>>PROJECT CONCLUDED
+ * 
  * @Note             >>>Small Confusion on runningID assignment, fixed the issue
  *                   >>>TASK 5 Debug: line 53: changed this.custID = Customer.runningID; to this.custID = id; 
  *                      Wrong ID assignment results in wrong ID (runningID instead of real ID) of customer instantiated by using Customer(int id, String name) 

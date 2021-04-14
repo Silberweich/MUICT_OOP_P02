@@ -6,9 +6,12 @@
  * 
  * @status           >>>TASK 3 COMPLETED
  *                   >>>TASK 5 COMPLETED
+ *                   >>>PROJECT CONCLUDED
  * 
  * @note             >>>Minor return bug during makePayment method, fixed by changing return value from enumerator Status
  *                      to return this.paymentStatus that has been modified in switch case instead
+ *                   >>>in this class, as explained above, the makePayment method have a big return value problem that 
+ *                      broke task 5.
  */
 import java.util.ArrayList;
 

@@ -6,8 +6,11 @@
  * 
  * @status           >>>TASK 1 COMPLETED
  *                   >>>TASK 5 COMPLETED
+ *                   >>>PROJECT CONCLUDED
+ * 
  * @Note             >>>Nothing much to say here just followed the instruction
  *                      and run the test case successfully
+ *                   >>>Not much fixing to be made on Task 5
  */
 
 public class EWallet implements Loggable{
