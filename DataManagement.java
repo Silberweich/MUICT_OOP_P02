@@ -593,17 +593,27 @@ public class DataManagement {
 	 * Filter the orders data (in the Map Collection) by the order's status and/or payment method
 	 * and calculate the summation of the sub-total amount of those filtered ordered.
 	 * 
+         * @author Phichayut N. [6388035]
+         * 
 	 * @param status
 	 * @param method
 	 * @return total summation of the sub-total of the orders matched with the given condition
 	 */
-	public static double filterSubTotal(Order.Status status, String method) {
-		
-		//******************* YOUR CODE HERE ******************
-		
-		return 0.0;
-		
-		//*****************************************************
+	public static double filterSubTotal(Order.Status status, String method) 
+        {
+            //******************* YOUR CODE HERE ******************
+            double subtot = 0.0;
+            for(Integer key: DataManagement.orderData.keySet())
+            {
+                if(DataManagement.orderData.get(key).getPaymentStatus() == status 
+                        && DataManagement.orderData.get(key).getPaymentMethod().equals(method))
+                {
+                    subtot += DataManagement.orderData.get(key).calSubTotal();
+                }
+            }
+            
+            return subtot;
+            //*****************************************************
 		
         }
 	
@@ -611,18 +621,28 @@ public class DataManagement {
 	 * Filter the orders data (in the Map Collection) by the order's status and/or payment method
 	 * and calculate the summation of the grand total amount of those filtered ordered.
 	 * 
+         * @author Phichayut N. [6388035]
+         * 
 	 * @param status
 	 * @param method
 	 * @return total summation of the grand total of the orders matched with the given condition
 	 */
 	
-	public static double filterGrandTotal(Order.Status status, String method) {
-		
-		//******************* YOUR CODE HERE ******************
-		
-		return 0.0;
-		
-		//*****************************************************
+	public static double filterGrandTotal(Order.Status status, String method) 
+        {
+            //******************* YOUR CODE HERE ******************
+            double subtot = 0.0;
+            for(Integer key: DataManagement.orderData.keySet())
+            {
+                if(DataManagement.orderData.get(key).getPaymentStatus() == status 
+                        && DataManagement.orderData.get(key).getPaymentMethod().equals(method))
+                {
+                    subtot += DataManagement.orderData.get(key).calGrandTotal();
+                }
+            }
+            
+            return subtot;
+            //*****************************************************
 				
 	}
 	
@@ -630,15 +650,38 @@ public class DataManagement {
 	 * Calculate the grand total payment group by each payment method for all paid ordered
 	 * The voided or pending orders are ignored
 	 * 
+         * @author Phichayut N. [6388035]
+         * 
 	 * @return Map<String, Double> where key is the method name, and value is the total of grand total payment
 	 */
-	public static Map<String, Double> groupGrandTotalByPaymentMethod(){
-		
-		//******************* YOUR CODE HERE ******************
-		
-		return null;
-		
-		//*****************************************************
+	public static Map<String, Double> groupGrandTotalByPaymentMethod()
+        {
+            //******************* YOUR CODE HERE ******************
+            HashMap<String, Double> uwu = new HashMap<>();
+            double _cash = 0.0, _card = 0.0, _ewal = 0.0;
+            for(Integer key: DataManagement.orderData.keySet())
+            {
+                if(DataManagement.orderData.get(key).getPaymentStatus() == Order.Status.PAID)
+                {
+                    switch(DataManagement.orderData.get(key).getPaymentMethod())
+                    {
+                        case "CASH":
+                                    _cash += DataManagement.orderData.get(key).calGrandTotal();
+                            break;
+                        case "CARD":
+                                    _card += DataManagement.orderData.get(key).calGrandTotal();
+                            break;
+                        case "EWALLET":
+                                    _ewal += DataManagement.orderData.get(key).calGrandTotal();
+                            break;
+                    }
+                }
+            }
+            uwu.put("CASH",_cash);
+            uwu.put("CARD",_card);
+            uwu.put("EWALLET",_ewal);
+            return uwu;
+            //*****************************************************
 				
 	}
 	
@@ -649,16 +692,54 @@ public class DataManagement {
 	 * Only "paid" orders are included in the output
 	 * If the amounts are equal, the order ID will be used later.
 	 * 
+         * @author Phichayut N. [6388035]
+         * 
 	 * @param asc indicate ascending or descending order
 	 * @return the sorted list of orders
 	 */
-	public static ArrayList<Order> sortPaidGrandTotal(boolean asc) {
-		
-		//******************* YOUR CODE HERE ******************
-		
-		return null;
-		
-		//*****************************************************
+	public static ArrayList<Order> sortPaidGrandTotal(boolean asc) 
+        {
+            //******************* YOUR CODE HERE ******************
+            ArrayList<Order> unsort = new ArrayList<>();
+            
+            for(Integer key: DataManagement.orderData.keySet())
+            {
+                if(DataManagement.orderData.get(key).getPaymentStatus() == Order.Status.PAID)
+                {
+                    unsort.add(DataManagement.orderData.get(key));
+                }
+            }
+            
+            //sorting below
+            
+            ArrayList<Order> sorted = new ArrayList<>();
+            
+            if(asc)//min to max
+            {
+                double current = 0;
+                for(Order n: unsort)
+                {
+                    if(n.calGrandTotal() > current)
+                    {
+                        sorted.add(n);
+                    }
+                    current = n.calGrandTotal();
+                } 
+            }
+            else//max to min
+            {
+                double current = Double.MAX_VALUE;
+                for(Order n: unsort)
+                {
+                    if(n.calGrandTotal() < current)
+                    {
+                        sorted.add(n);
+                    }
+                    current = n.calGrandTotal();
+                }
+            }
+            return sorted;
+            //*****************************************************
 	}
 
 }
