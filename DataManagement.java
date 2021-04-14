@@ -6,17 +6,13 @@
  * 
  * @status           >>>TASK 1 COMPLETED
  * @status           >>>TASK 2 COMPLETED
- * @status           >>>TASK 5 ON GOING
+ * @status           >>>TASK 5 COMPLETED
+ *                   >>>TASK 6 COMPLETED
  * @Note             >>> import
  * 
  * @import java.io.FileNotFoundException used for error detection during try-catch in reading files
  * @import java.util.Scanner to use scanner.nextline()
  * 
- * FOR TASK 5
- * @import java.io.BufferedWriter;
- * @import java.io.FileOutputStream;
- * @import java.io.OutputStreamWriter;
- * @import java.io.OutputStream;
  */
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -490,6 +486,11 @@ public class DataManagement {
          * right in this method.
          * same input parameter as all the store.. method but list is arraylist of string extracted
          * from each store.. method.
+         * 
+         * OH NO I FORGOT TO LOOK ABOVE, THERE IS A METHOD TO EASILY WRITE LOG
+         * IM SO STUPID
+         * ACTUALLY, MINE IS COOL, I PRINT ARRAY LIST OF STRING
+         * 
          * @author Phichayut    Ngoennim [6388035]
          * @param filename
          * @param append
@@ -753,5 +754,4 @@ public class DataManagement {
             return sorted;
             //*****************************************************
 	}
-
 }
