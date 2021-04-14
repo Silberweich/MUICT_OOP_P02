@@ -18,14 +18,10 @@
  * @import java.io.OutputStreamWriter;
  * @import java.io.OutputStream;
  */
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -34,8 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 
 public class DataManagement {
@@ -504,26 +499,13 @@ public class DataManagement {
             FileWriter fWrite = null;
             try
             {
-                if(append)//append
+                fWrite = new FileWriter(file, append);
+                for(String l: list)
                 {
-                    fWrite = new FileWriter(file, true);
-                    for(String l: list)
-                    {
-                        fWrite.write(l);
-                        fWrite.write(System.getProperty( "line.separator" ));
-                    }
-                    fWrite.close();
+                    fWrite.write(l);
+                    fWrite.write(System.getProperty( "line.separator" ));
                 }
-                else// dont append
-                {
-                    fWrite = new FileWriter(file, false);
-                    for(String l: list)
-                    {
-                        fWrite.write(l);
-                        fWrite.write(System.getProperty( "line.separator" ));
-                    }
-                    fWrite.close();
-                } 
+                fWrite.close();
             }
             catch(IOException e)
             {
