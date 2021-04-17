@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  * @author Phichayut    Ngoennim [6388035] >>> MAIN CONTRIBUTOR
  * @author Jirayu       Klinudom [6388085]
@@ -121,6 +126,31 @@ public class EWallet implements Loggable{
 				+ ",username::" + username 
 				+ ",encodedpassword::" + password 
 				+ ",balance::" + Loggable.df.format(balance);
+	}
+	public String setNewPassword(String newPassword, int CustomerID, String OldPassword) {
+		
+		BufferedReader br;
+		try {
+				br = new BufferedReader(new FileReader ("wallet.txt"));
+			String s;
+			while((s = br.readLine()) != null){
+				if(s.matches("^\\d,[A-Z]+,\\d+,\\d+.\\d{2}")) {
+					String[]result = s.split(",");
+					if(Integer.parseInt(result[0])==CustomerID&&Integer.parseInt(result[2])==OldPassword.hashCode()) {
+						this.password = newPassword.hashCode();
+					}
+				}
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		this.password = newPassword.hashCode();
+		System.out.println("This is your new password: "+newPassword);
+		return newPassword;
 	}
 	
 	//*****************************************************************************//
