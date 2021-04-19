@@ -57,10 +57,15 @@ public class DataManagement {
 	
 	//*****************************************************************************//
         
-        /** * ADDITIONAL METHOD
+        /** * ADDITIONAL USEFUL METHOD: (CHALLENGE SUBMISSION AS WELL)
+         * 
 	 * Validates input from given string, using dataType param to tell the switch
          * on which regex should the string compare to
 	 * 
+         * THIS IS A COLLECTIVE FILTER METHOD, INCASE THE TXT FORMATING CHANGES, THE METHOD HAS ALL THE REGEX
+         * IN THE RESPONSIBLE SWITCH-CASE. IT IS ALSO MODULAR, MEANING THAT YOU COULD ADD SPECIAL CASES LIKE
+         * CUSTOMER AND ONLINECUSTOMER THAT HAS DIFFERENT FORMATTING
+         * 
          * @author Perakorn Nimitkul [6388127]
 	 * @param input passed from init methods
          * @param dataType tells filter what type this will be filtered for
@@ -119,8 +124,8 @@ public class DataManagement {
                 case "Order": //Order
                 {
                     Boolean inputVoided = false; //used to check illegal input
-                    System.out.println("******PROCESSING ORDER LINE******");
-                    System.out.println("ORDERLine: "+input);
+                    //System.out.println("******PROCESSING ORDER LINE******");
+                    //System.out.println("ORDERLine: "+input);
                     String[] orderStringSplt = input.split(",");
                     String[] itemsStringSplt = orderStringSplt[2].split("\\|");
                     String[] paymentStringSplt = orderStringSplt[3].split("::");
@@ -187,12 +192,12 @@ public class DataManagement {
                                if(!inputVoided) //Final check, if not void then this string is a legal input
                                {
                                    returnOperand = "T:Order";
-                                   System.out.println("+++++LEGIT++++++");
+                                   //System.out.println("+++++LEGIT++++++");
                                }
                                else
                                {
                                    returnOperand = "BAD_INPUT";
-                                   System.out.println("-------BAD-------");
+                                   //System.out.println("-------BAD-------");
                                }
                             }
                         }

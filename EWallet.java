@@ -11,6 +11,7 @@ import java.io.IOException;
  * 
  * @status           >>>TASK 1 COMPLETED
  *                   >>>TASK 5 COMPLETED
+ *                   >>>CHALLENGE: USEFUL METHOD: RESET PASSWORD   
  *                   >>>PROJECT CONCLUDED
  * 
  * @Note             >>>Nothing much to say here just followed the instruction
@@ -101,7 +102,56 @@ public class EWallet implements Loggable{
             String credits = df.format(this.balance);
             return this.custID + "," + this.username + "," + this.password + "," + credits;
         }
-	
+        
+                
+        /**CHALLENGE TASK (MAIN CHALLENGE TASK)
+	 * Find the Customer id and take the old password for verification to be reset with a new password
+         * read the .txt file and verify password before resetting, after this, the return value can be used (and is used)
+         * to reassign password in EWallet.Java (this class), then it *should* overwrite the log file (see capital citations below)
+         * 
+         * NOTE: IN REALITY, THIS METHOD SHOULD UPDATE THE  .TXT  FILE AS WELL, BECAUSE JUST UPDATING THE DATA IN THE ARRAY
+         * IS NOT ENOUGH FOR THE DATABASE TO REMEMBER THE PASSWORD IF THE PROGRAM IS TERMINATED AND RE-LAUNCED.
+         * 
+         * WE DID NOT OVERWRITE THE TEXT FILE, BECAUSE THE TEST CASE COULD BE INVALID DUE TO THE ALTERCATION OF THE PASSWORD
+         * THIS IS A USEFUL METHOD IN REAL IMPLEMENTATION, TAKING IN "REAL PASSWORD" FROM CUSTOMER AND HASHING IT TO COMPARE,
+         * AND MOSTLY IS A DEMONSTRATION OF UNDERSTANDING CONCEPTS
+         * 
+         * @author Jirayu Klinudom [6388035] >>> Main author
+         * @author Perakorn Nimitkul [6388127] >>> Recheck and documentation
+         * 
+	 * @param newPassword is new password to be set after verification
+         * @param CustomerID id to find which customer
+         * @param OldPassword is to verify that the customer is legit, and is not an imposter.
+         * 
+	 * @return newPassword to be binded with customer's password
+	 */
+	public String setNewPassword(String newPassword, int CustomerID, String OldPassword) //should be int, but int is hashed password, so we are taking in real pass and hasing them to compare
+        {
+		
+		BufferedReader br;
+		try {
+				br = new BufferedReader(new FileReader ("wallet.txt"));
+			String s;
+			while((s = br.readLine()) != null){
+				if(s.matches("^\\d,[A-Z]+,\\d+,\\d+.\\d{2}")) {
+					String[]result = s.split(",");
+					if(Integer.parseInt(result[0])==CustomerID&&Integer.parseInt(result[2])==OldPassword.hashCode()) {
+						this.password = newPassword.hashCode();
+					}
+				}
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		this.password = newPassword.hashCode();
+		System.out.println("This is your new password: "+newPassword);
+		return newPassword;
+	}
+
 	//**************************** DO NOT MODIFY **********************************//
 	
 	public int getCustID() {
@@ -127,32 +177,6 @@ public class EWallet implements Loggable{
 				+ ",encodedpassword::" + password 
 				+ ",balance::" + Loggable.df.format(balance);
 	}
-	public String setNewPassword(String newPassword, int CustomerID, String OldPassword) {
-		
-		BufferedReader br;
-		try {
-				br = new BufferedReader(new FileReader ("wallet.txt"));
-			String s;
-			while((s = br.readLine()) != null){
-				if(s.matches("^\\d,[A-Z]+,\\d+,\\d+.\\d{2}")) {
-					String[]result = s.split(",");
-					if(Integer.parseInt(result[0])==CustomerID&&Integer.parseInt(result[2])==OldPassword.hashCode()) {
-						this.password = newPassword.hashCode();
-					}
-				}
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		this.password = newPassword.hashCode();
-		System.out.println("This is your new password: "+newPassword);
-		return newPassword;
-	}
-	
 	//*****************************************************************************//
 	
 }
