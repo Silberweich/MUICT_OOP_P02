@@ -1,4 +1,4 @@
-# MUICT_OOP_P02
+# https://github.com/Silberweich/MUICT_OOP_P02
 *PASSED ALL TEST CASE PROJECT CONCLUDED && CHALLENGE CONCLUDED*. As for Instructor, you can read about what we have done below.  
 This project was done by 3 person
 ```java
@@ -73,3 +73,15 @@ as seen here, you can see the name, completion status, and some small note inclu
 ```
 ---
 ## Challenge Task
+The explaination can also be found on EWallet.java, ***line 108-155.***
+> A useful function that we use on our system is "Password Reset for Ewallet User", very useful for a person that want to change their password constantly. 
+> This Function finds the Customer id and take the old password for verification to be reset with a new password read the .txt file and verify password before resetting.
+> After this, the return value can be used (and is used) to reassign password in EWallet.Java , then it *should* overwrite the log file.  
+
+The Method `public static String filter(String input, String dataType)` in DataManagement.java, can also be considered an extra useful method. ***Line 61-214***
+> This method is a collective filtering method that is use to facilitate the existing function that is: 
+> + `public static Map<Integer, Customer> initCustomer(String filename)`
+> + `public static Map<Integer, EWallet> initWallet(String filename)`
+> + `public static Map<String, Item> initStock(String filename)`
+> + `public static Map<Integer, Order> initOrder(String filename)`
+
