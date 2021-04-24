@@ -1,4 +1,4 @@
-
+//NO TAMPERING
 //**************************** DO NOT MODIFY THIS INTERFACE**********************************//
 
 public interface Authorization {

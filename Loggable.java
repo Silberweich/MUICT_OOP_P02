@@ -1,5 +1,5 @@
+//NO TAMPERING
 //**************************** DO NOT MODIFY THIS INTERFACE**********************************//
-
 import java.text.DecimalFormat;
 
 public interface Loggable {
