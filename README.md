@@ -1,5 +1,5 @@
 # MUICT_OOP_P02
-Time to Crunch, my Dudes. As for Instructor, you can read about what we have done below.  
+*PASSED ALL TEST CASE PROJECT CONCLUDED && CHALLENGE CONCLUDED*. As for Instructor, you can read about what we have done below.  
 This project was done by 3 person
 ```java
 /**
@@ -71,3 +71,5 @@ as seen here, you can see the name, completion status, and some small note inclu
    ...
    }
 ```
+---
+## Challenge Task
