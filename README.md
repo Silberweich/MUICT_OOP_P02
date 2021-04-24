@@ -28,8 +28,8 @@ This project was done by 3 person
 > The mistake on Order.java was found while doing Task 5, and was debugged by both Perakorn N. [6388127], and Jirayu K. [6388085].
 - [x] Task 6: Analyzing Data 20%
 > Task 6 was mainly implemented by Phichayut N. [6388035], the calculation and filtering was a piece of cake. And again debugging was done by Jirayu K. [6388085]
-- [ ] Task 7: Challenge Task, Do some creative things?
-> No one spent time on this yet.
+- [x] Task 7: Challenge Task, Do some creative things?
+> Jirayu K. [6388085] and Perakorn N. [6388127], worked on this part, explained below.
 ---
 ## Some Explaination
 First of all, we should note that many of our comments and explaination was done inside the javadoc in each and every java file. Many of our file will include a header like this below:
