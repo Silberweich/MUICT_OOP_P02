@@ -7,6 +7,7 @@
  * @status           >>>TASK 1 COMPLETED
  *                   >>>TASK 5 COMPLETED
  *                   >>>PROJECT CONCLUDED
+ *                   >>>CHALLENGE CONCLUDED
  * 
  * @Note             >>>Small Confusion on runningID assignment, fixed the issue
  *                   >>>TASK 5 Debug: line 53: changed this.custID = Customer.runningID; to this.custID = id; 

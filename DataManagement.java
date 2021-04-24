@@ -9,6 +9,7 @@
  * @status           >>>TASK 5 COMPLETED
  *                   >>>TASK 6 COMPLETED
  *                   >>>PROJECT CONCLUDED
+ *                   >>>CHALLENGE CONCLUDED : FILTER FIX 
  * 
  * @Note             >>> There is so much to talk about
  * 
@@ -454,10 +455,13 @@ public class DataManagement {
 	 */
 	public static void removeLogFile(String filename) {
 		
-		try {
-			File log = new File(filename);
-			Files.deleteIfExists(log.toPath());
-		} catch (IOException e) {
+		try 
+                {
+                    File log = new File(filename);
+                    Files.deleteIfExists(log.toPath());
+		} 
+                catch (IOException e) 
+                {
 			e.printStackTrace();
 		}
 	}
@@ -471,12 +475,15 @@ public class DataManagement {
 	 */
 	public static void writeDataLog(String filename, Boolean append, String str)
 	{
-		try {
-			FileWriter fileWriter = new FileWriter(filename, append);
-			PrintWriter printWriter = new PrintWriter(fileWriter);
-		    printWriter.println(str); 
-		    printWriter.close();
-		} catch (IOException e) {
+		try 
+                {
+                    FileWriter fileWriter = new FileWriter(filename, append);
+                    PrintWriter printWriter = new PrintWriter(fileWriter);
+                    printWriter.println(str); 
+                    printWriter.close();
+		} 
+                catch (IOException e) 
+                {
 			e.printStackTrace();
 		}
 	    

@@ -1,23 +1,24 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
 /**
  * @author Phichayut    Ngoennim [6388035] >>> MAIN CONTRIBUTOR
- * @author Jirayu       Klinudom [6388085]
- * @author Perakorn     Nimitkul [6388127]
+ * @author Jirayu       Klinudom [6388085] >>> CHALLENGE TASK
+ * @author Perakorn     Nimitkul [6388127] >>> CHALLENGE TASK RECHECK
  * Section              2
  * 
  * @status           >>>TASK 1 COMPLETED
  *                   >>>TASK 5 COMPLETED
- *                   >>>CHALLENGE: USEFUL METHOD: RESET PASSWORD   
  *                   >>>PROJECT CONCLUDED
+ *                   >>>CHALLENGE CONCLUDED: USEFUL METHOD: RESET PASSWORD   
  * 
  * @Note             >>>Nothing much to say here just followed the instruction
  *                      and run the test case successfully
  *                   >>>Not much fixing to be made on Task 5
  */
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 
 public class EWallet implements Loggable{
 	
@@ -125,7 +126,8 @@ public class EWallet implements Loggable{
          * 
 	 * @return newPassword to be binded with customer's password
 	 */
-	public String setNewPassword(String newPassword, int CustomerID, String OldPassword) //should be int, but int is hashed password, so we are taking in real pass and hasing them to compare
+	public String setNewPassword(String newPassword, int CustomerID, String OldPassword) 
+        //should be int, but int is hashed password, so we are taking in real pass and hasing them to compare
         {
 		
 		BufferedReader br;

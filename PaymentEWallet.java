@@ -6,6 +6,8 @@
  * 
  * @status           >>>TASK 1 COMPLETED
  *                   >>>PROJECT CONCLUDED
+ *                   >>>CHALLENGE CONCLUDED
+ * 
  * @Note             >>>almost forgot to do the hashCode()
  */
 

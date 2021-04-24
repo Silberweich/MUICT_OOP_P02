@@ -6,6 +6,7 @@
  * 
  * @status           >>>TASK 1 COMPLETED
  *                   >>>PROJECT CONCLUDED
+ *                   >>>CHALLENGE CONCLUDED
  * 
  * @Note             >>>Small confusion on AMERICAN EXPRESS card
  *                   >>>No further fix sadkek
@@ -66,7 +67,8 @@ public class CreditCard{
                     break;
                 case JCB: //Changed JCB condition
                     String subDigits = number.substring(0, 4);
-                    if(number.length()==16&&(3528<=Integer.parseInt(subDigits)&&Integer.parseInt(subDigits)<=3589)) //Parse substr of the 4th four digits and compare if its valid
+                    if(number.length()==16&&(3528<=Integer.parseInt(subDigits)
+                            &&Integer.parseInt(subDigits)<=3589)) //Parse substr of the 4th four digits and compare if its valid
                     {
                             valid = true;
                     }

@@ -7,6 +7,7 @@
  * @status           >>>TASK 3 COMPLETED
  *                   >>>TASK 5 COMPLETED
  *                   >>>PROJECT CONCLUDED
+ *                   >>>CHALLENGE CONCLUDED
  * 
  * @note             >>>Minor return bug during makePayment method, fixed by changing return value from enumerator Status
  *                      to return this.paymentStatus that has been modified in switch case instead
@@ -18,20 +19,20 @@ import java.util.ArrayList;
 public class Order implements Loggable{
 	
 	//**************************** DO NOT MODIFY **********************************//
-	public static int runningID = 0;					// static variable for assigning a unique ID to an order
-	public static final double TAX_RATE = 0.07;			// fixed tax rate
+	public static int runningID = 0;			// static variable for assigning a unique ID to an order
+	public static final double TAX_RATE = 0.07;		// fixed tax rate
 	public static final double SHIPPING_RATE = 0.50;	// fixed shipping rate
 	
-	public enum Status{PENDING, PAID, VOIDED};			// Payment status of an order
+	public enum Status{PENDING, PAID, VOIDED};		// Payment status of an order
 	
-	private int orderID;			// unique order ID
-	private Customer customer;		// customer object who place this order
+	private int orderID;                                    // unique order ID
+	private Customer customer;                              // customer object who place this order
 	private ArrayList<Item> items = new ArrayList<Item>();	// list of items
 	private double subTotal = 0.0;				// sub total of this order
-	private double tax = 0.0;					// tax amount
+	private double tax = 0.0;				// tax amount
 	private double shippingFee = 0.0;			// shipping fee (for online customer only)
 	private double grandTotal = 0.0;			// summation of sub total, tax, and shipping fee
-	private Status paymentStatus = Status.PENDING;	// the payment status
+	private Status paymentStatus = Status.PENDING;          // the payment status
 	private String paymentMethod = "UNKNOWN";		// if payment is pending, the method is unknown yet
 	
 	//*****************************************************************************//
